@@ -1,0 +1,37 @@
+import type { InputHTMLAttributes } from 'react';
+import { useId } from 'react';
+
+import { Field, HelpText, Label, StyledInput } from './Input.styles';
+
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  label?: string;
+  type?: 'text' | 'email' | 'tel' | 'password';
+  /** Error message. Renders in place of `helpText` and marks the field invalid. */
+  error?: string;
+  helpText?: string;
+}
+
+export function Input({ label, type = 'text', error, helpText, id, ...rest }: InputProps) {
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
+  const descriptionId = error || helpText ? `${inputId}-description` : undefined;
+
+  return (
+    <Field>
+      {label && <Label htmlFor={inputId}>{label}</Label>}
+      <StyledInput
+        id={inputId}
+        type={type}
+        $hasError={Boolean(error)}
+        aria-invalid={Boolean(error)}
+        aria-describedby={descriptionId}
+        {...rest}
+      />
+      {(error || helpText) && (
+        <HelpText id={descriptionId} $isError={Boolean(error)}>
+          {error || helpText}
+        </HelpText>
+      )}
+    </Field>
+  );
+}

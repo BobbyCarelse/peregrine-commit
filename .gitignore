@@ -1,0 +1,11 @@
+node_modules
+dist
+storybook-static
+.turbo
+.next
+.env
+.env.local
+*.log
+.DS_Store
+coverage
+.eslintcache
