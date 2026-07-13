@@ -1,0 +1,9 @@
+{
+  "extends": "@peregrine-commit/typescript-config/node-library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "types": ["node", "jest"]
+  },
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"]
+}
