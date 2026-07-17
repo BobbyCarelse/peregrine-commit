@@ -17,15 +17,14 @@ export const Navbar = ({ mode, toggleMode }: NavbarProps) => {
         { href: '/contact', label: 'Contact' },
       ]}
       ctaElement={
-        mode === 'dark' ? (
-          <span onClick={toggleMode} style={{ cursor: 'pointer' }}>
-            &#127766;
-          </span>
-        ) : (
-          <span onClick={toggleMode} style={{ cursor: 'pointer' }}>
-            &#127762;
-          </span>
-        )
+        <button
+          type="button"
+          onClick={toggleMode}
+          aria-label={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          style={{ cursor: 'pointer', background: 'none', border: 'none', padding: 0 }}
+        >
+          {mode === 'dark' ? '\u{1F31E}' : '\u{1F312}'}
+        </button>
       }
     />
   );
