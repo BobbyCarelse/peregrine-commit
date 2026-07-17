@@ -5,6 +5,7 @@ import type { SemanticTokenPrimitives } from './types';
 
 const primitives: SemanticTokenPrimitives = {
   space: {
+    0: 'var(--space-0)',
     1: 'var(--space-1)',
     2: 'var(--space-2)',
     3: 'var(--space-3)',
