@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
-export const Label = styled.label`
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
+export const Label = styled.label<{ $spacing: SpacingProps }>`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--stack-xs);
   font-family: var(--font-body);
+
+  ${spacingCss}
 `;
 
 export const LabelText = styled.span`
@@ -14,8 +19,8 @@ export const LabelText = styled.span`
 `;
 
 export const StyledTextarea = styled.textarea`
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
+  padding: 10px var(--inset-sm);
+  border-radius: var(--control-radius);
   border: 1.5px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-text-primary);

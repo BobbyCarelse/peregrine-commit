@@ -10,6 +10,7 @@ const meta: Meta<typeof Heading> = {
     variant: { control: 'select', options: ['display', 'heading'] },
     size: { control: 'select', options: ['xl', 'lg', 'md', 'sm'] },
     color: { control: 'select', options: ['primary', 'secondary', 'muted', 'accent', 'onAccent'] },
+    weight: { control: 'select', options: [100, 200, 300, 400, 500, 600, 700, 800, 900] },
   },
   args: {
     children: 'Committed to production, not just to Figma.',
@@ -34,6 +35,10 @@ export const HeadingLg: Story = {
 
 export const AccentColor: Story = {
   args: { color: 'accent' },
+};
+
+export const WeightOverride: Story = {
+  args: { weight: 400, children: 'A display heading, dialed down to a regular weight.' },
 };
 
 export const TypeScale: Story = {

@@ -80,6 +80,45 @@ export const theme = {
     monoMd: 'var(--text-mono-md)',
     monoSm: 'var(--text-mono-sm)',
   },
+  inset: {
+    sm: 'var(--inset-sm)',
+    md: 'var(--inset-md)',
+    lg: 'var(--inset-lg)',
+    xl: 'var(--inset-xl)',
+  },
+  stack: {
+    xs: 'var(--stack-xs)',
+    sm: 'var(--stack-sm)',
+    md: 'var(--stack-md)',
+    lg: 'var(--stack-lg)',
+    section: 'var(--stack-section)',
+  },
+  inline: {
+    xs: 'var(--inline-xs)',
+    sm: 'var(--inline-sm)',
+    md: 'var(--inline-md)',
+    lg: 'var(--inline-lg)',
+  },
+  control: {
+    heightSm: 'var(--control-height-sm)',
+    heightMd: 'var(--control-height-md)',
+    heightLg: 'var(--control-height-lg)',
+    padX: 'var(--control-pad-x)',
+    radius: 'var(--control-radius)',
+    border: 'var(--control-border)',
+    font: 'var(--control-font)',
+    gap: 'var(--control-gap)',
+  },
+  surface: {
+    radius: 'var(--surface-radius)',
+    border: 'var(--surface-border)',
+    shadowRaised: 'var(--surface-shadow-raised)',
+    shadowOverlay: 'var(--surface-shadow-overlay)',
+  },
+  focusRing: {
+    ring: 'var(--focus-ring)',
+    offset: 'var(--focus-ring-offset)',
+  },
 } as const;
 
 export type PeregrineTheme = typeof theme;

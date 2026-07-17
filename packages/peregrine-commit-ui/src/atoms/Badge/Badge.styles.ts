@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components';
 
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
 export type BadgeTone = 'neutral' | 'accent' | 'success';
 
 const toneStyles: Record<BadgeTone, ReturnType<typeof css>> = {
@@ -17,7 +20,7 @@ const toneStyles: Record<BadgeTone, ReturnType<typeof css>> = {
   `,
 };
 
-export const StyledBadge = styled.span<{ $tone: BadgeTone }>`
+export const StyledBadge = styled.span<{ $tone: BadgeTone; $spacing: SpacingProps }>`
   display: inline-flex;
   align-items: center;
   padding: 3px 10px;
@@ -29,4 +32,5 @@ export const StyledBadge = styled.span<{ $tone: BadgeTone }>`
   text-transform: uppercase;
 
   ${({ $tone }) => toneStyles[$tone]}
+  ${spacingCss}
 `;

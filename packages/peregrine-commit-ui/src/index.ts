@@ -4,6 +4,20 @@ export type { PeregrineThemeProviderProps } from './theme/ThemeProvider';
 export { theme } from './theme/theme';
 export type { PeregrineTheme } from './theme/theme';
 export { GlobalStyle } from './theme/tokens.css';
+export type { SpacingProps, SpaceToken } from './theme/spacingProps';
+export type { FontWeightProps, FontWeightToken } from './theme/fontWeightProps';
+
+// Primitives
+export { Box } from './primitives/Box';
+export type {
+  BoxAlignItems,
+  BoxBackground,
+  BoxFlexDirection,
+  BoxFlexWrap,
+  BoxGap,
+  BoxJustifyContent,
+  BoxProps,
+} from './primitives/Box';
 
 // Atoms
 export { Badge } from './atoms/Badge';
@@ -40,6 +54,8 @@ export { SectionHeading } from './molecules/SectionHeading';
 export type { SectionHeadingAlign, SectionHeadingProps } from './molecules/SectionHeading';
 export { Tooltip } from './molecules/Tooltip';
 export type { TooltipProps } from './molecules/Tooltip';
+export { Stats } from './molecules/Stats';
+export type { StatsProps } from './molecules/Stats';
 
 // Organisms
 export { Footer } from './organisms/Footer';

@@ -1,5 +1,4 @@
 import type { Decorator, Preview } from '@storybook/react';
-import React from 'react';
 
 import { PeregrineThemeProvider } from '../src/theme/ThemeProvider';
 

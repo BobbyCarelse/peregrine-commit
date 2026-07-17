@@ -20,3 +20,12 @@ export const Default: Story = {
     </Container>
   ),
 };
+
+export const Flex: Story = {
+  render: () => (
+    <Container flex gap="space-4" alignItems="center" justifyContent="space-between">
+      <div style={{ background: 'var(--color-surface-sunken)', padding: 24 }}>Left</div>
+      <div style={{ background: 'var(--color-surface-sunken)', padding: 24 }}>Right</div>
+    </Container>
+  ),
+};

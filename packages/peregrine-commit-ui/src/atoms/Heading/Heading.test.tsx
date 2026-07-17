@@ -57,4 +57,13 @@ describe('Heading', () => {
     const { container } = render(<Heading color={color}>Title</Heading>);
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it('overrides the variant/size font-weight when "weight" is passed', () => {
+    render(
+      <Heading data-testid="heading" weight={400}>
+        Title
+      </Heading>,
+    );
+    expect(screen.getByTestId('heading')).toHaveStyle({ fontWeight: 'var(--font-weight-400)' });
+  });
 });

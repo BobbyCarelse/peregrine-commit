@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 
-export const StyledFooter = styled.footer`
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
+export const StyledFooter = styled.footer<{ $spacing: SpacingProps }>`
   border-top: 1px solid var(--color-border);
   background: var(--color-bg);
+
+  ${spacingCss}
 `;
 
 export const Content = styled.div`

@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components';
 
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
 export type IconButtonVariant = 'primary' | 'secondary';
 export type IconButtonSize = 'sm' | 'md' | 'lg';
 
@@ -11,16 +14,16 @@ export const sizeDimensions: Record<IconButtonSize, number> = {
 
 const sizeStyles: Record<IconButtonSize, ReturnType<typeof css>> = {
   sm: css`
-    width: ${sizeDimensions.sm}px;
-    height: ${sizeDimensions.sm}px;
+    width: var(--control-height-sm);
+    height: var(--control-height-sm);
   `,
   md: css`
-    width: ${sizeDimensions.md}px;
-    height: ${sizeDimensions.md}px;
+    width: var(--control-height-md);
+    height: var(--control-height-md);
   `,
   lg: css`
-    width: ${sizeDimensions.lg}px;
-    height: ${sizeDimensions.lg}px;
+    width: var(--control-height-lg);
+    height: var(--control-height-lg);
   `,
 };
 
@@ -49,8 +52,9 @@ const variantStyles: Record<IconButtonVariant, ReturnType<typeof css>> = {
 export const StyledIconButton = styled.button<{
   $variant: IconButtonVariant;
   $size: IconButtonSize;
+  $spacing: SpacingProps;
 }>`
-  border-radius: var(--radius-md);
+  border-radius: var(--control-radius);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -59,6 +63,7 @@ export const StyledIconButton = styled.button<{
 
   ${({ $size }) => sizeStyles[$size]}
   ${({ $variant }) => variantStyles[$variant]}
+  ${spacingCss}
 
   &:disabled {
     opacity: 0.5;

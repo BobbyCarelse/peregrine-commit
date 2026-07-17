@@ -1,12 +1,16 @@
 import styled, { css } from 'styled-components';
 
-export const StyledCard = styled.div<{ $interactive: boolean; $padding: string }>`
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
+export const StyledCard = styled.div<{ $interactive: boolean; $spacing: SpacingProps }>`
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: ${({ $padding }) => $padding};
+  border: var(--surface-border);
+  border-radius: var(--surface-radius);
   box-shadow: none;
   transition: box-shadow var(--duration-fast) var(--ease-standard);
+
+  ${spacingCss}
 
   ${({ $interactive }) =>
     $interactive &&

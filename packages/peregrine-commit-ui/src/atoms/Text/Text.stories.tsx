@@ -22,6 +22,7 @@ const meta: Meta<typeof Text> = {
         'warning',
       ],
     },
+    weight: { control: 'select', options: [100, 200, 300, 400, 500, 600, 700, 800, 900] },
   },
   args: {
     children:
@@ -47,6 +48,10 @@ export const Label: Story = {
 
 export const Mono: Story = {
   args: { variant: 'mono', children: 'git commit -m "ship it"' },
+};
+
+export const WeightOverride: Story = {
+  args: { weight: 800, children: 'Body copy, bumped to a heavier weight.' },
 };
 
 export const TypeScale: Story = {

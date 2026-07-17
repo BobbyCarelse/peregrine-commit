@@ -1,10 +1,14 @@
 import type { LucideIcon } from 'lucide-react';
 import type { ButtonHTMLAttributes } from 'react';
 
+import type { SpacingProps } from '../../theme/spacingProps';
+import { extractSpacingProps } from '../../theme/spacingProps';
 import type { IconButtonSize, IconButtonVariant } from './IconButton.styles';
 import { sizeDimensions, StyledIconButton } from './IconButton.styles';
 
-export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IconButtonProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style'>,
+    SpacingProps {
   /** Icon component from `lucide-react`, e.g. `ArrowUpRight`. */
   icon: LucideIcon;
   /** Accessible label, also used as the native tooltip. */
@@ -21,8 +25,9 @@ export function IconButton({
   variant = 'secondary',
   size = 'md',
   type = 'button',
-  ...rest
+  ...props
 }: IconButtonProps) {
+  const [spacing, rest] = extractSpacingProps(props);
   return (
     <StyledIconButton
       type={type}
@@ -30,6 +35,7 @@ export function IconButton({
       title={label}
       $variant={variant}
       $size={size}
+      $spacing={spacing}
       {...rest}
     >
       <Icon size={sizeDimensions[size] * 0.45} aria-hidden="true" />

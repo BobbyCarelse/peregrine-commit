@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
 export type SwitchSize = 'sm' | 'md';
 
 const trackDimensions: Record<SwitchSize, { width: number; height: number }> = {
@@ -12,21 +15,31 @@ const thumbDimension: Record<SwitchSize, number> = {
   md: 16,
 };
 
-const thumbInset = 3;
+// Desired visual gap between the thumb and the track's outer edge.
+const thumbGap = 3;
+
+// Track has a 1px border (--border-width-sm), and with global box-sizing:
+// border-box that border eats into the padding box that absolutely
+// positioned children (like Thumb) are placed relative to. Subtract it so
+// the thumb's rendered inset from the track's outer edge stays symmetric.
+const trackBorderWidth = 1;
+const thumbInset = thumbGap - trackBorderWidth;
 
 const thumbTravel = (size: SwitchSize) =>
-  trackDimensions[size].width - thumbDimension[size] - thumbInset * 2;
+  trackDimensions[size].width - thumbDimension[size] - thumbGap * 2;
 
-export const Label = styled.label`
+export const Label = styled.label<{ $spacing: SpacingProps }>`
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--inline-sm);
   font-family: var(--font-body);
   cursor: pointer;
 
   &:has(input:disabled) {
     cursor: not-allowed;
   }
+
+  ${spacingCss}
 `;
 
 // Visually hidden but still focusable and in the accessibility tree — the
@@ -60,13 +73,17 @@ export const Track = styled.span<{ $size: SwitchSize }>`
   display: inline-flex;
   flex-shrink: 0;
   border-radius: var(--radius-full);
-  background: var(--color-border-strong);
-  transition: background var(--duration-fast) var(--ease-standard);
+  background: var(--color-surface-sunken);
+  border: var(--border-width-sm) solid var(--color-border-strong);
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
   width: ${({ $size }) => trackDimensions[$size].width}px;
   height: ${({ $size }) => trackDimensions[$size].height}px;
 
   ${HiddenInput}:checked + & {
     background: var(--color-accent);
+    border-color: var(--color-accent);
   }
 
   ${HiddenInput}:checked + & ${Thumb} {

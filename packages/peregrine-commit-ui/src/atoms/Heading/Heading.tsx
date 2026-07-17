@@ -1,9 +1,15 @@
 import type { ElementType, HTMLAttributes } from 'react';
 
+import type { FontWeightProps } from '../../theme/fontWeightProps';
+import type { SpacingProps } from '../../theme/spacingProps';
+import { extractSpacingProps } from '../../theme/spacingProps';
 import type { HeadingColor, HeadingSize, HeadingVariant } from './Heading.styles';
 import { StyledHeading } from './Heading.styles';
 
-export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
+export interface HeadingProps
+  extends Omit<HTMLAttributes<HTMLHeadingElement>, 'style'>,
+    SpacingProps,
+    FontWeightProps {
   /** Which type scale to draw from. @default "display" */
   variant?: HeadingVariant;
   /** @default "md" */
@@ -19,7 +25,19 @@ export function Heading({
   size = 'md',
   color = 'primary',
   as = 'h2',
-  ...rest
+  weight,
+  ...props
 }: HeadingProps) {
-  return <StyledHeading as={as} $variant={variant} $size={size} $color={color} {...rest} />;
+  const [spacing, rest] = extractSpacingProps(props);
+  return (
+    <StyledHeading
+      as={as}
+      $variant={variant}
+      $size={size}
+      $color={color}
+      $weight={weight}
+      $spacing={spacing}
+      {...rest}
+    />
+  );
 }

@@ -27,4 +27,29 @@ describe('Container', () => {
     );
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it('applies flex, gap, and alignment as CSS', () => {
+    render(
+      <Container
+        data-testid="wrapper"
+        flex
+        gap="space-4"
+        alignItems="center"
+        justifyContent="space-between"
+        flexDirection="row"
+        flexWrap="wrap"
+      >
+        Content
+      </Container>,
+    );
+    const wrapper = screen.getByTestId('wrapper');
+    expect(wrapper).toHaveStyle({
+      display: 'flex',
+      gap: 'var(--space-4)',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    });
+  });
 });

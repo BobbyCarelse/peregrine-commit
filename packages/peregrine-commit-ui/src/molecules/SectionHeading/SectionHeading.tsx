@@ -1,9 +1,14 @@
 import type { HTMLAttributes } from 'react';
 
+import { Heading } from '../../atoms/Heading';
+import { Text } from '../../atoms/Text';
+import type { SpacingProps } from '../../theme/spacingProps';
+import { extractSpacingProps } from '../../theme/spacingProps';
 import type { SectionHeadingAlign } from './SectionHeading.styles';
-import { Description, Eyebrow, Title, Wrapper } from './SectionHeading.styles';
+import { Wrapper } from './SectionHeading.styles';
 
-export interface SectionHeadingProps extends HTMLAttributes<HTMLDivElement> {
+export interface SectionHeadingProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'style'>, SpacingProps {
   eyebrow?: string;
   title: string;
   description?: string;
@@ -16,13 +21,25 @@ export function SectionHeading({
   title,
   description,
   align = 'left',
-  ...rest
+  ...props
 }: SectionHeadingProps) {
+  const [spacing, rest] = extractSpacingProps(props);
+
   return (
-    <Wrapper $align={align} {...rest}>
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <Title>{title}</Title>
-      {description && <Description>{description}</Description>}
+    <Wrapper $align={align} $spacing={spacing} {...rest}>
+      {eyebrow && (
+        <Text as="span" variant="overline" color="accent">
+          {eyebrow}
+        </Text>
+      )}
+      <Heading variant="display" size="md">
+        {title}
+      </Heading>
+      {description && (
+        <Text variant="body" size="lg" color="secondary">
+          {description}
+        </Text>
+      )}
     </Wrapper>
   );
 }

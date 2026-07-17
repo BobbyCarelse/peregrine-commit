@@ -1,8 +1,10 @@
 import type { HTMLAttributes } from 'react';
 
+import type { SpacingProps } from '../../theme/spacingProps';
+import { extractSpacingProps } from '../../theme/spacingProps';
 import { Brand, Content, Copyright, FooterLink, Links, StyledFooter } from './Footer.styles';
 
-export interface FooterProps extends HTMLAttributes<HTMLElement> {
+export interface FooterProps extends Omit<HTMLAttributes<HTMLElement>, 'style'>, SpacingProps {
   /** @default "hello@peregrinecommit.com" */
   email?: string;
   githubUrl?: string;
@@ -13,10 +15,11 @@ export function Footer({
   email = 'hello@peregrinecommit.com',
   githubUrl,
   linkedinUrl,
-  ...rest
+  ...props
 }: FooterProps) {
+  const [spacing, rest] = extractSpacingProps(props);
   return (
-    <StyledFooter {...rest}>
+    <StyledFooter $spacing={spacing} {...rest}>
       <Content>
         <Brand>
           <svg viewBox="0 0 120 120" width={18} height={18} aria-hidden="true">

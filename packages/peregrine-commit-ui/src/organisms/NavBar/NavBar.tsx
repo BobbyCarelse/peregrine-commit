@@ -1,6 +1,8 @@
-import type { HTMLAttributes } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 
 import { Button } from '../../atoms/Button';
+import type { SpacingProps } from '../../theme/spacingProps';
+import { extractSpacingProps } from '../../theme/spacingProps';
 import { Brand, BrandName, Content, Header, Nav, NavLink } from './NavBar.styles';
 
 export interface NavBarLink {
@@ -8,25 +10,29 @@ export interface NavBarLink {
   label: string;
 }
 
-export interface NavBarProps extends Omit<HTMLAttributes<HTMLElement>, 'onClick'> {
+export interface NavBarProps
+  extends Omit<HTMLAttributes<HTMLElement>, 'onClick' | 'style'>,
+    SpacingProps {
   links?: NavBarLink[];
   activeHref?: string;
   onNavigate?: (href: string) => void;
-  /** @default "Start a project" */
   ctaLabel?: string;
   onCta?: () => void;
+  ctaElement?: ReactNode;
 }
 
 export function NavBar({
   links = [],
   activeHref,
   onNavigate,
-  ctaLabel = 'Start a project',
+  ctaLabel,
   onCta,
-  ...rest
+  ctaElement,
+  ...props
 }: NavBarProps) {
+  const [spacing, rest] = extractSpacingProps(props);
   return (
-    <Header {...rest}>
+    <Header $spacing={spacing} {...rest}>
       <Content>
         <Brand>
           <svg viewBox="0 0 120 120" width={26} height={26} aria-hidden="true">
@@ -71,9 +77,13 @@ export function NavBar({
           ))}
         </Nav>
 
-        <Button variant="primary" size="sm" onClick={onCta}>
-          {ctaLabel}
-        </Button>
+        {ctaElement ? (
+          ctaElement
+        ) : ctaLabel && onCta ? (
+          <Button variant="primary" size="sm" onClick={onCta}>
+            {ctaLabel}
+          </Button>
+        ) : null}
       </Content>
     </Header>
   );

@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
-export const Header = styled.header`
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
+export const Header = styled.header<{ $spacing: SpacingProps }>`
   position: sticky;
   top: 0;
   z-index: 20;
   background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
+
+  ${spacingCss}
 `;
 
 export const Content = styled.div`

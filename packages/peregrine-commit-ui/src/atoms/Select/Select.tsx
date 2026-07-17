@@ -1,6 +1,8 @@
 import type { SelectHTMLAttributes } from 'react';
 import { useId } from 'react';
 
+import type { SpacingProps } from '../../theme/spacingProps';
+import { extractSpacingProps } from '../../theme/spacingProps';
 import { Label, LabelText, StyledSelect } from './Select.styles';
 
 export interface SelectOption {
@@ -8,17 +10,20 @@ export interface SelectOption {
   label: string;
 }
 
-export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps
+  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'style'>,
+    SpacingProps {
   label?: string;
   options: SelectOption[];
 }
 
-export function Select({ label, options, id, ...rest }: SelectProps) {
+export function Select({ label, options, id, ...props }: SelectProps) {
   const generatedId = useId();
   const selectId = id ?? generatedId;
+  const [spacing, rest] = extractSpacingProps(props);
 
   return (
-    <Label htmlFor={selectId}>
+    <Label htmlFor={selectId} $spacing={spacing}>
       {label && <LabelText>{label}</LabelText>}
       <StyledSelect id={selectId} {...rest}>
         {options.map((option) => (

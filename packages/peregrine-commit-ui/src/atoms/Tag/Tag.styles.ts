@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
-export const StyledTag = styled.span`
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
+export const StyledTag = styled.span<{ $spacing: SpacingProps }>`
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -11,6 +14,8 @@ export const StyledTag = styled.span`
   font-family: var(--font-body);
   font-size: 0.8125rem;
   color: var(--color-text-primary);
+
+  ${spacingCss}
 `;
 
 export const RemoveButton = styled.button`

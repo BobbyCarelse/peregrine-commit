@@ -1,10 +1,15 @@
 import styled, { css } from 'styled-components';
 
-export const Field = styled.div`
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
+export const Field = styled.div<{ $spacing: SpacingProps }>`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--stack-xs);
   font-family: var(--font-body);
+
+  ${spacingCss}
 `;
 
 export const Label = styled.label`
@@ -14,8 +19,10 @@ export const Label = styled.label`
 `;
 
 export const StyledInput = styled.input<{ $hasError: boolean }>`
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
+  height: var(--control-height-md);
+  box-sizing: border-box;
+  padding: 0 var(--inset-sm);
+  border-radius: var(--control-radius);
   border: 1.5px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-text-primary);

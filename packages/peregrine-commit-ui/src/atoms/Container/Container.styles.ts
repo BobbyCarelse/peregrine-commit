@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
+import { Box } from '../../primitives/Box';
+
+export const StyledContainer = styled(Box)`
   max-width: var(--container-max);
   margin-left: auto;
   margin-right: auto;

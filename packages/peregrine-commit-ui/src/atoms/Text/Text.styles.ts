@@ -1,6 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export type TextVariant = 'body' | 'label' | 'mono';
+import type { FontWeightToken } from '../../theme/fontWeightProps';
+import { fontWeightVar } from '../../theme/fontWeightProps';
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
+export type TextVariant = 'body' | 'label' | 'mono' | 'overline';
 export type TextSize = 'lg' | 'md' | 'sm';
 export type TextColor =
   'primary' | 'secondary' | 'muted' | 'accent' | 'onAccent' | 'success' | 'danger' | 'warning';
@@ -23,6 +28,12 @@ const sizeFont: Record<TextVariant, Record<TextSize, string>> = {
     md: 'var(--text-mono-md)',
     sm: 'var(--text-mono-sm)',
   },
+  overline: {
+    // Overline draws from the label scale — only its casing/tracking differ, applied below.
+    lg: 'var(--text-label-md)',
+    md: 'var(--text-label-md)',
+    sm: 'var(--text-label-sm)',
+  },
 };
 
 const colorVar: Record<TextColor, string> = {
@@ -36,8 +47,24 @@ const colorVar: Record<TextColor, string> = {
   warning: 'var(--color-warning)',
 };
 
-export const StyledText = styled.p<{ $variant: TextVariant; $size: TextSize; $color: TextColor }>`
+export const StyledText = styled.p<{
+  $variant: TextVariant;
+  $size: TextSize;
+  $color: TextColor;
+  $weight?: FontWeightToken;
+  $spacing: SpacingProps;
+}>`
   margin: 0;
   font: ${({ $variant, $size }) => sizeFont[$variant][$size]};
   color: ${({ $color }) => colorVar[$color]};
+  ${({ $weight }) => $weight && `font-weight: ${fontWeightVar($weight)};`}
+
+  ${({ $variant }) =>
+    $variant === 'overline' &&
+    css`
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+    `}
+
+  ${spacingCss}
 `;

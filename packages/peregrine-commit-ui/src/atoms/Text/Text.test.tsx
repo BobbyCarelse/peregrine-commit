@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 import { Text } from './Text';
 
-const variants = ['body', 'label', 'mono'] as const;
+const variants = ['body', 'label', 'mono', 'overline'] as const;
 const sizes = ['lg', 'md', 'sm'] as const;
 const colors = [
   'primary',
@@ -58,5 +58,14 @@ describe('Text', () => {
   it.each(colors)('renders the "%s" color with no accessibility violations', async (color) => {
     const { container } = render(<Text color={color}>Content</Text>);
     expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('overrides the variant/size font-weight when "weight" is passed', () => {
+    render(
+      <Text data-testid="text" weight={800}>
+        Content
+      </Text>,
+    );
+    expect(screen.getByTestId('text')).toHaveStyle({ fontWeight: 'var(--font-weight-800)' });
   });
 });

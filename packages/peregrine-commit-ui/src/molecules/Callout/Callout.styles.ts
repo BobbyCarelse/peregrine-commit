@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components';
 
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
 export type CalloutTone = 'info' | 'accent' | 'success';
 
 const toneBorder: Record<CalloutTone, ReturnType<typeof css>> = {
@@ -20,11 +23,11 @@ export const toneIconColor: Record<CalloutTone, string> = {
   success: 'var(--color-success)',
 };
 
-export const StyledCallout = styled.div<{ $tone: CalloutTone }>`
+export const StyledCallout = styled.div<{ $tone: CalloutTone; $spacing: SpacingProps }>`
   display: flex;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: var(--radius-md);
+  gap: var(--inline-sm);
+  padding: 14px var(--inset-md);
+  border-radius: var(--surface-radius);
   border-width: 1.5px;
   border-style: solid;
   background: var(--color-surface);
@@ -33,6 +36,7 @@ export const StyledCallout = styled.div<{ $tone: CalloutTone }>`
   color: var(--color-text-primary);
 
   ${({ $tone }) => toneBorder[$tone]}
+  ${spacingCss}
 `;
 
 export const IconSlot = styled.span<{ $color: string }>`

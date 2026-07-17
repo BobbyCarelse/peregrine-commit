@@ -1,23 +1,29 @@
 import styled, { css } from 'styled-components';
 
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 const sizeStyles: Record<ButtonSize, ReturnType<typeof css>> = {
   sm: css`
-    padding: 6px 14px;
+    height: var(--control-height-sm);
+    padding: 0 14px;
     font-size: 0.8125rem;
-    gap: 6px;
+    gap: var(--inline-xs);
   `,
   md: css`
-    padding: 10px 20px;
+    height: var(--control-height-md);
+    padding: 0 var(--control-pad-x);
     font-size: 0.9375rem;
-    gap: 8px;
+    gap: var(--inline-sm);
   `,
   lg: css`
-    padding: 14px 28px;
+    height: var(--control-height-lg);
+    padding: 0 28px;
     font-size: 1.0625rem;
-    gap: 10px;
+    gap: var(--inline-sm);
   `,
 };
 
@@ -58,10 +64,14 @@ const variantStyles: Record<ButtonVariant, ReturnType<typeof css>> = {
   `,
 };
 
-export const StyledButton = styled.button<{ $variant: ButtonVariant; $size: ButtonSize }>`
+export const StyledButton = styled.button<{
+  $variant: ButtonVariant;
+  $size: ButtonSize;
+  $spacing: SpacingProps;
+}>`
   font-family: var(--font-body);
   font-weight: 600;
-  border-radius: var(--radius-md);
+  border-radius: var(--control-radius);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -72,6 +82,7 @@ export const StyledButton = styled.button<{ $variant: ButtonVariant; $size: Butt
 
   ${({ $size }) => sizeStyles[$size]}
   ${({ $variant }) => variantStyles[$variant]}
+  ${spacingCss}
 
   &:disabled {
     opacity: 0.5;

@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+import type { FontWeightToken } from '../../theme/fontWeightProps';
+import { fontWeightVar } from '../../theme/fontWeightProps';
+import type { SpacingProps } from '../../theme/spacingProps';
+import { spacingCss } from '../../theme/spacingProps';
+
 export type HeadingVariant = 'display' | 'heading';
 export type HeadingSize = 'xl' | 'lg' | 'md' | 'sm';
 export type HeadingColor = 'primary' | 'secondary' | 'muted' | 'accent' | 'onAccent';
@@ -32,9 +37,14 @@ export const StyledHeading = styled.h2<{
   $variant: HeadingVariant;
   $size: HeadingSize;
   $color: HeadingColor;
+  $weight?: FontWeightToken;
+  $spacing: SpacingProps;
 }>`
   margin: 0;
   font: ${({ $variant, $size }) => sizeFont[$variant][$size]};
   color: ${({ $color }) => colorVar[$color]};
   letter-spacing: var(--tracking-tight);
+  ${({ $weight }) => $weight && `font-weight: ${fontWeightVar($weight)};`}
+
+  ${spacingCss}
 `;
