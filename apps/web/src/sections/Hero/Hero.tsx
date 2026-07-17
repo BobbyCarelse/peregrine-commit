@@ -1,8 +1,6 @@
 import { Box, Button, Container, SectionHeading, Stats } from '@peregrine-commit/ui';
 
-interface HeroProps {}
-
-export const Hero = ({}: HeroProps) => {
+export const Hero = () => {
   return (
     <Container flex flexDirection="column" justifyContent="center" gap="space-6" py="space-24">
       <SectionHeading
