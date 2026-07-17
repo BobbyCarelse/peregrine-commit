@@ -1,4 +1,4 @@
-import { NavBar as BaseNavbar, Switch } from '@peregrine-commit/ui';
+import { NavBar as BaseNavbar } from '@peregrine-commit/ui';
 import type { ThemeMode } from '../../hooks/useThemeMode';
 
 interface NavbarProps {
