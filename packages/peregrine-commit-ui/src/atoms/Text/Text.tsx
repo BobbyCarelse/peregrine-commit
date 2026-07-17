@@ -7,9 +7,7 @@ import type { TextColor, TextSize, TextVariant } from './Text.styles';
 import { StyledText } from './Text.styles';
 
 export interface TextProps
-  extends Omit<HTMLAttributes<HTMLParagraphElement>, 'style'>,
-    SpacingProps,
-    FontWeightProps {
+  extends Omit<HTMLAttributes<HTMLParagraphElement>, 'style'>, SpacingProps, FontWeightProps {
   /** Which type scale to draw from. @default "body" */
   variant?: TextVariant;
   /** @default "md" */

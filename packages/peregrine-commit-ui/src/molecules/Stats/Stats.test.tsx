@@ -1,7 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { describe, expect, it } from 'vitest';
-import { Stats } from "./Stats";
+import { Stats } from './Stats';
 
 describe('Stats', () => {
   it('renders the stat and description', () => {

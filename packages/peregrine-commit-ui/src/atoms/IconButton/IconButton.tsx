@@ -7,8 +7,7 @@ import type { IconButtonSize, IconButtonVariant } from './IconButton.styles';
 import { sizeDimensions, StyledIconButton } from './IconButton.styles';
 
 export interface IconButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style'>,
-    SpacingProps {
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style'>, SpacingProps {
   /** Icon component from `lucide-react`, e.g. `ArrowUpRight`. */
   icon: LucideIcon;
   /** Accessible label, also used as the native tooltip. */

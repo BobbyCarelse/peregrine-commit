@@ -6,8 +6,7 @@ import { extractSpacingProps } from '../../theme/spacingProps';
 import { Label, LabelText, StyledTextarea } from './Textarea.styles';
 
 export interface TextareaProps
-  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'style'>,
-    SpacingProps {
+  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'style'>, SpacingProps {
   label?: string;
 }
 

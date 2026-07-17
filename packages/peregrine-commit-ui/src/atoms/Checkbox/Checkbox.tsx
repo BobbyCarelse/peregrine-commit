@@ -5,8 +5,7 @@ import { extractSpacingProps } from '../../theme/spacingProps';
 import { Label, LabelText, StyledCheckbox } from './Checkbox.styles';
 
 export interface CheckboxProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'style'>,
-    SpacingProps {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'style'>, SpacingProps {
   label: string;
 }
 

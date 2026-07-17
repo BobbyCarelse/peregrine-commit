@@ -11,8 +11,7 @@ export interface SelectOption {
 }
 
 export interface SelectProps
-  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'style'>,
-    SpacingProps {
+  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'style'>, SpacingProps {
   label?: string;
   options: SelectOption[];
 }

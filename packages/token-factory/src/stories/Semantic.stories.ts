@@ -86,6 +86,9 @@ export const ControlsAndSurfaces: Story = {
     focusRing.style.font = 'var(--text-body-sm)';
     row.append(focusRing);
 
-    return createSection('control-* / surface-* / focus-ring (tab to the last box to focus it)', row);
+    return createSection(
+      'control-* / surface-* / focus-ring (tab to the last box to focus it)',
+      row,
+    );
   },
 };

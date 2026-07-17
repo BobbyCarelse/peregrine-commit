@@ -7,9 +7,7 @@ import type { HeadingColor, HeadingSize, HeadingVariant } from './Heading.styles
 import { StyledHeading } from './Heading.styles';
 
 export interface HeadingProps
-  extends Omit<HTMLAttributes<HTMLHeadingElement>, 'style'>,
-    SpacingProps,
-    FontWeightProps {
+  extends Omit<HTMLAttributes<HTMLHeadingElement>, 'style'>, SpacingProps, FontWeightProps {
   /** Which type scale to draw from. @default "display" */
   variant?: HeadingVariant;
   /** @default "md" */

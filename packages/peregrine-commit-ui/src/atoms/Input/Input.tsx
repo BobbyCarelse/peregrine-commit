@@ -6,8 +6,7 @@ import { extractSpacingProps } from '../../theme/spacingProps';
 import { Field, HelpText, Label, StyledInput } from './Input.styles';
 
 export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'style'>,
-    SpacingProps {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'style'>, SpacingProps {
   label?: string;
   type?: 'text' | 'email' | 'tel' | 'password';
   /** Error message. Renders in place of `helpText` and marks the field invalid. */

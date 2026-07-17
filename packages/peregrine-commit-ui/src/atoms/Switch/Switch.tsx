@@ -6,8 +6,7 @@ import type { SwitchSize } from './Switch.styles';
 import { HiddenInput, Label, LabelText, Thumb, Track } from './Switch.styles';
 
 export interface SwitchProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'style'>,
-    SpacingProps {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'style'>, SpacingProps {
   label: string;
   /** @default "md" */
   size?: SwitchSize;

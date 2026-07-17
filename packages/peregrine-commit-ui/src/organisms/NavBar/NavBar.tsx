@@ -11,8 +11,7 @@ export interface NavBarLink {
 }
 
 export interface NavBarProps
-  extends Omit<HTMLAttributes<HTMLElement>, 'onClick' | 'style'>,
-    SpacingProps {
+  extends Omit<HTMLAttributes<HTMLElement>, 'onClick' | 'style'>, SpacingProps {
   links?: NavBarLink[];
   activeHref?: string;
   onNavigate?: (href: string) => void;

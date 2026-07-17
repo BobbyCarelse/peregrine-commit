@@ -6,8 +6,7 @@ import type { ButtonSize, ButtonVariant } from './Button.styles';
 import { StyledButton } from './Button.styles';
 
 export interface ButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style'>,
-    SpacingProps {
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style'>, SpacingProps {
   /** Visual style. @default "primary" */
   variant?: ButtonVariant;
   /** Size. @default "md" */

@@ -12,7 +12,7 @@ const meta: Meta<typeof Stats> = {
   },
   args: {
     stat: '7+ yrs',
-    description:'In productions'
+    description: 'In productions',
   },
 };
 

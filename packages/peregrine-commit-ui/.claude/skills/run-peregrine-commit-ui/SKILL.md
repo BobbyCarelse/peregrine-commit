@@ -88,9 +88,9 @@ build steps succeed in ~1.4s total.
    kill $(lsof -t -i :6006) 2>/dev/null
    ```
 
-| driver.mjs command | what it does |
-|---|---|
-| `list` | Fetches `/index.json` from the running Storybook, prints `id \t title > name` per story |
+| driver.mjs command                | what it does                                                                                                                                                                       |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `list`                            | Fetches `/index.json` from the running Storybook, prints `id \t title > name` per story                                                                                            |
 | `screenshot <story-id> [out.png]` | Navigates `iframe.html?id=<story-id>&viewMode=story`, waits for the story to actually paint, screenshots (default `screenshots/<story-id>.png`), prints any browser console errors |
 
 Set `STORYBOOK_URL` env var if the server isn't on the default `localhost:6006`.
@@ -110,7 +110,8 @@ pnpm test
 ```
 
 Verified: 18 test files, 126 tests, all passing (vitest + Testing Library
-+ jest-axe), ~2.3s.
+
+- jest-axe), ~2.3s.
 
 ---
 
