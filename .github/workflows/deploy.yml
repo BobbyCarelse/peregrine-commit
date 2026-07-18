@@ -1,0 +1,76 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: ['CI']
+    types: [completed]
+    branches: [main]
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Stage production api (pruned, prod-only deps)
+        run: pnpm --filter=api deploy --prod ./deploy-out/api
+
+      - name: Stage web static build
+        run: |
+          mkdir -p deploy-out/web
+          cp -r apps/web/dist/. deploy-out/web/
+
+      - name: Stage pm2 ecosystem config
+        run: cp deploy/ecosystem.config.cjs deploy-out/ecosystem.config.cjs
+
+      - name: Create deploy archive
+        run: tar -czf deploy.tar.gz -C deploy-out .
+
+      - name: Copy archive to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: 'deploy.tar.gz'
+          target: '/home/${{ secrets.EC2_USER }}/deploy'
+          overwrite: true
+
+      - name: Extract release and reload pm2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
+            APP_DIR=/home/${{ secrets.EC2_USER }}/peregrine-commit
+            mkdir -p "$APP_DIR"
+            tar -xzf /home/${{ secrets.EC2_USER }}/deploy/deploy.tar.gz -C "$APP_DIR"
+            cd "$APP_DIR"
+            pm2 startOrReload ecosystem.config.cjs --env production
+            pm2 describe web > /dev/null 2>&1 && pm2 restart web || pm2 serve ./web 4173 --name web
+            pm2 save
