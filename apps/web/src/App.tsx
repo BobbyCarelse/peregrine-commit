@@ -5,9 +5,9 @@ export const App = () => {
   return (
     <AppLayout>
       <Hero />
-      <Explore/>
-      <Experience/>
-      <Resume/>
+      <Explore />
+      <Experience />
+      <Resume />
     </AppLayout>
   );
 };

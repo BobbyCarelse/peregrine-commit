@@ -12,9 +12,9 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
 
   return (
     <PeregrineThemeProvider mode={mode}>
-        <Navbar mode={mode} toggleMode={toggleMode} />
-        {children}
-        <Footer />
+      <Navbar mode={mode} toggleMode={toggleMode} />
+      {children}
+      <Footer />
     </PeregrineThemeProvider>
   );
 };

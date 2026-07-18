@@ -1,14 +1,15 @@
-import { Box, Container, SectionHeading } from "@peregrine-commit/ui"
+import { Box, Container, SectionHeading } from '@peregrine-commit/ui';
 
 export const Experience = () => {
-
-    return <Box background="bg">
-        <Container  gap="space-6" py="space-24">
+  return (
+    <Box background="bg">
+      <Container gap="space-6" py="space-24">
         <SectionHeading
-        eyebrow="EXPERIENCE"
-        title="Seven years, six industires"
-        description="Independent consulting through Peregrine Commit, plus the roles that came before it."
-      />
-    </Container>
+          eyebrow="EXPERIENCE"
+          title="Seven years, six industires"
+          description="Independent consulting through Peregrine Commit, plus the roles that came before it."
+        />
+      </Container>
     </Box>
-}
+  );
+};

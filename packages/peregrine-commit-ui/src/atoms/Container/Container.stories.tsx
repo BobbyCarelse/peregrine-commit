@@ -41,8 +41,8 @@ export const PrimaryBackground: Story = {
 export const SecondaryBackground: Story = {
   render: () => (
     <Container background="surface-sunken" p="space-6">
-      Uses the secondary, sunken background (`color-surface-sunken`) for visual
-      separation from the primary background — flips with the Theme toolbar above.
+      Uses the secondary, sunken background (`color-surface-sunken`) for visual separation from the
+      primary background — flips with the Theme toolbar above.
     </Container>
   ),
 };
