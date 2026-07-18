@@ -28,6 +28,17 @@ describe('Container', () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 
+  it('applies background as a CSS variable', () => {
+    render(
+      <Container data-testid="wrapper" background="surface-sunken">
+        Content
+      </Container>,
+    );
+    expect(screen.getByTestId('wrapper')).toHaveStyle({
+      backgroundColor: 'var(--color-surface-sunken)',
+    });
+  });
+
   it('applies flex, gap, and alignment as CSS', () => {
     render(
       <Container

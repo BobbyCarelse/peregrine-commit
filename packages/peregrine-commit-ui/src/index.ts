@@ -51,7 +51,7 @@ export type { CalloutProps, CalloutTone } from './molecules/Callout';
 export { Card } from './molecules/Card';
 export type { CardProps } from './molecules/Card';
 export { SectionHeading } from './molecules/SectionHeading';
-export type { SectionHeadingAlign, SectionHeadingProps } from './molecules/SectionHeading';
+export type { SectionHeadingProps } from './molecules/SectionHeading';
 export { Tooltip } from './molecules/Tooltip';
 export type { TooltipProps } from './molecules/Tooltip';
 export { Stats } from './molecules/Stats';

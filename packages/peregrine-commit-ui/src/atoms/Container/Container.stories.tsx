@@ -29,3 +29,20 @@ export const Flex: Story = {
     </Container>
   ),
 };
+
+export const PrimaryBackground: Story = {
+  render: () => (
+    <Container background="bg" p="space-6">
+      Uses the primary page background (`color-bg`).
+    </Container>
+  ),
+};
+
+export const SecondaryBackground: Story = {
+  render: () => (
+    <Container background="surface-sunken" p="space-6">
+      Uses the secondary, sunken background (`color-surface-sunken`) for visual
+      separation from the primary background — flips with the Theme toolbar above.
+    </Container>
+  ),
+};

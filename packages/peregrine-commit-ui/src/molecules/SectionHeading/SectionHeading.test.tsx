@@ -4,8 +4,6 @@ import { describe, expect, it } from 'vitest';
 
 import { SectionHeading } from './SectionHeading';
 
-const aligns = ['left', 'center'] as const;
-
 describe('SectionHeading', () => {
   it('renders the title as a heading', () => {
     render(<SectionHeading title="How I work" />);
@@ -28,8 +26,18 @@ describe('SectionHeading', () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  it.each(aligns)('renders "%s" alignment with no accessibility violations', async (align) => {
-    const { container } = render(<SectionHeading title="How I work" align={align} />);
+  it('has no accessibility violations when centered', async () => {
+    const { container } = render(<SectionHeading title="How I work" centered />);
     expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('centers content as a block when centered is set', () => {
+    render(<SectionHeading data-testid="wrapper" title="How I work" centered />);
+    expect(screen.getByTestId('wrapper')).toHaveStyle({ textAlign: 'center' });
+  });
+
+  it('left-aligns content by default', () => {
+    render(<SectionHeading data-testid="wrapper" title="How I work" />);
+    expect(screen.getByTestId('wrapper')).toHaveStyle({ textAlign: 'left' });
   });
 });

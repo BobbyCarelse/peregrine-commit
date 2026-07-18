@@ -7,14 +7,14 @@ const meta: Meta<typeof SectionHeading> = {
   component: SectionHeading,
   tags: ['autodocs'],
   argTypes: {
-    align: { control: 'select', options: ['left', 'center'] },
+    centered: { control: 'boolean' },
   },
   args: {
     eyebrow: 'How I work',
     title: 'Committed to production, not just to Figma.',
     description:
       "I'm Bobby Carelse, a full-stack engineer who's shipped for banks, exchanges, farms, and schools.",
-    align: 'left',
+    centered: false,
   },
 };
 
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof SectionHeading>;
 export const Default: Story = {};
 
 export const Centered: Story = {
-  args: { align: 'center' },
+  args: { centered: true },
 };
 
 export const TitleOnly: Story = {

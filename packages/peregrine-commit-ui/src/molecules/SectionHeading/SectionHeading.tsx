@@ -4,7 +4,6 @@ import { Heading } from '../../atoms/Heading';
 import { Text } from '../../atoms/Text';
 import type { SpacingProps } from '../../theme/spacingProps';
 import { extractSpacingProps } from '../../theme/spacingProps';
-import type { SectionHeadingAlign } from './SectionHeading.styles';
 import { Wrapper } from './SectionHeading.styles';
 
 export interface SectionHeadingProps
@@ -12,21 +11,21 @@ export interface SectionHeadingProps
   eyebrow?: string;
   title: string;
   description?: string;
-  /** @default "left" */
-  align?: SectionHeadingAlign;
+  /** Centers the eyebrow, title, and description as a block. @default false */
+  centered?: boolean;
 }
 
 export function SectionHeading({
   eyebrow,
   title,
   description,
-  align = 'left',
+  centered = false,
   ...props
 }: SectionHeadingProps) {
   const [spacing, rest] = extractSpacingProps(props);
 
   return (
-    <Wrapper $align={align} $spacing={spacing} {...rest}>
+    <Wrapper $centered={centered} $spacing={spacing} {...rest}>
       {eyebrow && (
         <Text as="span" variant="overline" color="accent">
           {eyebrow}
