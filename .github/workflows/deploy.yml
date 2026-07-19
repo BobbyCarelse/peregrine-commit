@@ -32,22 +32,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build
-        run: pnpm build
-
-      - name: Stage production api (pruned, prod-only deps)
-        run: pnpm --filter=api deploy --prod ./deploy-out/api
-
-      - name: Stage web static build
-        run: |
-          mkdir -p deploy-out/web
-          cp -r apps/web/dist/. deploy-out/web/
-
-      - name: Stage pm2 ecosystem config
-        run: cp deploy/ecosystem.config.cjs deploy-out/ecosystem.config.cjs
+      - name: Build web
+        run: pnpm exec turbo run build --filter=web
 
       - name: Create deploy archive
-        run: tar -czf deploy.tar.gz -C deploy-out .
+        run: tar -czf deploy.tar.gz -C apps/web/dist .
 
       - name: Copy archive to EC2
         uses: appleboy/scp-action@v0.1.7
@@ -67,10 +56,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             set -e
-            APP_DIR=/home/${{ secrets.EC2_USER }}/peregrine-commit
+            APP_DIR=/home/${{ secrets.EC2_USER }}/peregrine-commit-web
             mkdir -p "$APP_DIR"
             tar -xzf /home/${{ secrets.EC2_USER }}/deploy/deploy.tar.gz -C "$APP_DIR"
-            cd "$APP_DIR"
-            pm2 startOrReload ecosystem.config.cjs --env production
-            pm2 describe web > /dev/null 2>&1 && pm2 restart web || pm2 serve ./web 4173 --name web
+            pm2 describe web > /dev/null 2>&1 && pm2 restart web || pm2 serve "$APP_DIR" 4173 --name web
             pm2 save
