@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { AppLayout } from './layouts';
-import { Experience, Explore, Hero, Resume } from './sections';
+import { Contact, Experience, Explore, Hero, Resume } from './sections';
 
 const SECTION_ID_BY_PATH: Record<string, string> = {
   '/': 'home',
   '/explore': 'explore',
   '/experience': 'experience',
   '/resume': 'resume',
+  '/contact': 'contact',
 };
 
 export const App = () => {
@@ -24,6 +25,7 @@ export const App = () => {
       <Explore />
       <Experience />
       <Resume />
+      <Contact/>
     </AppLayout>
   );
 };
