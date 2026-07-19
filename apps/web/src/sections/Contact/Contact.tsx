@@ -1,9 +1,9 @@
 import { Box, Button, Container, Input, SectionHeading, Textarea } from '@peregrine-commit/ui';
-import { Formik } from 'formik';
+import { Formik, type FormikValues } from 'formik';
 import { contactFormValidationSchema } from './Contact.validation';
 
 export const Contact = () => {
-  function handleSubmit(values: any) {
+  function handleSubmit(values: FormikValues) {
     console.log(values);
   }
 
