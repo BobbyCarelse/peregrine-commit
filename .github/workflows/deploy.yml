@@ -38,26 +38,26 @@ jobs:
       - name: Create deploy archive
         run: tar -czf deploy.tar.gz -C apps/web/dist .
 
-      - name: Copy archive to EC2
-        uses: appleboy/scp-action@v0.1.7
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: 'deploy.tar.gz'
-          target: '/home/${{ secrets.EC2_USER }}/deploy'
-          overwrite: true
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Add EC2 host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Copy archive to EC2
+        run: scp deploy.tar.gz ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:~/deploy.tar.gz
 
       - name: Extract release and reload pm2
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
+        run: |
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
             set -e
-            APP_DIR=/home/${{ secrets.EC2_USER }}/peregrine-commit-web
+            APP_DIR=~/peregrine-commit-web
             mkdir -p "$APP_DIR"
-            tar -xzf /home/${{ secrets.EC2_USER }}/deploy/deploy.tar.gz -C "$APP_DIR"
+            tar -xzf ~/deploy.tar.gz -C "$APP_DIR"
             pm2 describe web > /dev/null 2>&1 && pm2 restart web || pm2 serve "$APP_DIR" 4173 --name web
             pm2 save
+          '
