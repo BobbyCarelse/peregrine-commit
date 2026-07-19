@@ -55,11 +55,11 @@ mechanism:
 Set these under repo Settings → Secrets and variables → Actions (referenced directly in
 `deploy.yml`):
 
-| Secret        | Value                                                            |
-| ------------- | ----------------------------------------------------------------- |
-| `EC2_HOST`    | Public DNS name or Elastic IP of the instance                    |
-| `EC2_USER`    | SSH login user (e.g. `ubuntu`)                                   |
-| `EC2_SSH_KEY` | Private half of the CI keypair from step 2, PEM/OpenSSH format   |
+| Secret        | Value                                                          |
+| ------------- | -------------------------------------------------------------- |
+| `EC2_HOST`    | Public DNS name or Elastic IP of the instance                  |
+| `EC2_USER`    | SSH login user (e.g. `ubuntu`)                                 |
+| `EC2_SSH_KEY` | Private half of the CI keypair from step 2, PEM/OpenSSH format |
 
 An Elastic IP is worth attaching so `EC2_HOST` doesn't change if the instance is stopped/restarted.
 No registry credentials are needed as a secret — pushing to GHCR uses the workflow's built-in
