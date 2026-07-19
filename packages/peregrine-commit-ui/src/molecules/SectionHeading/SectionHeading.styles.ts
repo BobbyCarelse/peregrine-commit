@@ -1,12 +1,16 @@
 import styled, { css } from 'styled-components';
 
-import type { SpacingProps } from '../../theme/spacingProps';
+import type { SpaceToken, SpacingProps } from '../../theme/spacingProps';
 import { spacingCss } from '../../theme/spacingProps';
 
-export const Wrapper = styled.div<{ $centered: boolean; $spacing: SpacingProps }>`
+export const Wrapper = styled.div<{
+  $centered: boolean;
+  $spacing: SpacingProps;
+  gap?: SpaceToken;
+}>`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: ${({ gap }) => (gap ? `var(--${gap})` : 'var(--space-3)')};
   text-align: ${({ $centered }) => ($centered ? 'center' : 'left')};
   max-width: ${({ $centered }) => ($centered ? '640px' : '560px')};
 
