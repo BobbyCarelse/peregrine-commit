@@ -5,6 +5,8 @@ export const Hero = () => {
     <Box id="home" background="bg">
       <Container flex flexDirection="column" justifyContent="center" gap="space-6" py="space-24">
         <SectionHeading
+          gap='space-6'
+          heading={{ size: 'xl', weight: 800 }}
           eyebrow="PEREGRINE COMMIT - SENIOR FULL-STACK ENGINEER"
           title="Seven years of shipping code that has to work."
           description="I'm Bobby Carelse - I take on senior full-stack and mobile engagements end to end: architecture, delivery, and the parts agencies skip. Always honest scoping, always a working commit to show for it."
