@@ -14,29 +14,27 @@ jobs:
   deploy:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
         with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Build images
+        run: docker compose -f deploy/docker-compose.yml build
 
-      - name: Build web
-        run: pnpm exec turbo run build --filter=web
-
-      - name: Create deploy archive
-        run: tar -czf deploy.tar.gz -C apps/web/dist .
+      - name: Push images
+        run: docker compose -f deploy/docker-compose.yml push
 
       - name: Setup SSH agent
         uses: webfactory/ssh-agent@v0.9.0
@@ -48,16 +46,30 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Copy archive to EC2
-        run: scp deploy.tar.gz ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:~/deploy.tar.gz
-
-      - name: Extract release and reload pm2
+      - name: Ensure Docker is installed on EC2
         run: |
           ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
             set -e
-            APP_DIR=~/peregrine-commit-web
-            mkdir -p "$APP_DIR"
-            tar -xzf ~/deploy.tar.gz -C "$APP_DIR"
-            pm2 describe web > /dev/null 2>&1 && pm2 restart web || pm2 serve "$APP_DIR" 4173 --name web
-            pm2 save
+            if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
+              echo "Docker + compose plugin already present"
+              exit 0
+            fi
+            curl -fsSL https://get.docker.com | sudo sh
+            sudo usermod -aG docker "$USER"
+            sudo systemctl enable --now docker
+          '
+
+      - name: Copy compose file to EC2
+        run: |
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'mkdir -p ~/peregrine-commit'
+          scp deploy/docker-compose.yml ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:~/peregrine-commit/docker-compose.yml
+
+      - name: Pull and restart containers on EC2
+        run: |
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
+            set -e
+            cd ~/peregrine-commit
+            docker compose pull
+            docker compose up -d --remove-orphans
+            docker image prune -f
           '

@@ -1,0 +1,33 @@
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+    image: ghcr.io/bobbycarelse/peregrine-commit-web:latest
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:8080:80'
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - internal
+
+  api:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+    image: ghcr.io/bobbycarelse/peregrine-commit-api:latest
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3000
+    env_file:
+      - path: .env
+        required: false
+    networks:
+      - internal
+
+networks:
+  internal: {}

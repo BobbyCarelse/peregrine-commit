@@ -1,0 +1,10 @@
+**/node_modules
+**/dist
+**/.turbo
+**/storybook-static
+docs
+deploy
+docker
+.github
+*.pdf
+.DS_Store
