@@ -1,9 +1,21 @@
 import type { HTMLAttributes, ReactNode } from 'react';
+import { useState } from 'react';
 
 import { Button } from '../../atoms/Button';
+import { Menu, X } from '../../icons';
 import type { SpacingProps } from '../../theme/spacingProps';
 import { extractSpacingProps } from '../../theme/spacingProps';
-import { Brand, BrandName, Content, Header, Nav, NavLink } from './NavBar.styles';
+import {
+  Brand,
+  BrandName,
+  Content,
+  CtaSlot,
+  Header,
+  MenuToggle,
+  Nav,
+  NavGroup,
+  NavLink,
+} from './NavBar.styles';
 
 export interface NavBarLink {
   href: string;
@@ -30,6 +42,8 @@ export function NavBar({
   ...props
 }: NavBarProps) {
   const [spacing, rest] = extractSpacingProps(props);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <Header $spacing={spacing} {...rest}>
       <Content>
@@ -57,32 +71,47 @@ export function NavBar({
           <BrandName>Peregrine Commit</BrandName>
         </Brand>
 
-        <Nav aria-label="Primary">
-          {links.map((link) => (
-            <NavLink
-              key={link.href}
-              href={link.href}
-              $active={activeHref === link.href}
-              aria-current={activeHref === link.href ? 'page' : undefined}
-              onClick={(event) => {
-                if (onNavigate) {
-                  event.preventDefault();
-                  onNavigate(link.href);
-                }
-              }}
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </Nav>
+        <MenuToggle
+          type="button"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isOpen}
+          aria-controls="navbar-menu"
+          onClick={() => setIsOpen((open) => !open)}
+        >
+          {isOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+        </MenuToggle>
 
-        {ctaElement ? (
-          ctaElement
-        ) : ctaLabel && onCta ? (
-          <Button variant="primary" size="sm" onClick={onCta}>
-            {ctaLabel}
-          </Button>
-        ) : null}
+        <NavGroup id="navbar-menu" $open={isOpen}>
+          <Nav aria-label="Primary">
+            {links.map((link) => (
+              <NavLink
+                key={link.href}
+                href={link.href}
+                $active={activeHref === link.href}
+                aria-current={activeHref === link.href ? 'page' : undefined}
+                onClick={(event) => {
+                  setIsOpen(false);
+                  if (onNavigate) {
+                    event.preventDefault();
+                    onNavigate(link.href);
+                  }
+                }}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </Nav>
+
+          {ctaElement ? (
+            <CtaSlot>{ctaElement}</CtaSlot>
+          ) : ctaLabel && onCta ? (
+            <CtaSlot>
+              <Button variant="primary" size="sm" onClick={onCta}>
+                {ctaLabel}
+              </Button>
+            </CtaSlot>
+          ) : null}
+        </NavGroup>
       </Content>
     </Header>
   );
