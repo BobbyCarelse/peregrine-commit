@@ -15,9 +15,10 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@peregrine-commit/ui": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@peregrine-commit/ui": "workspace:*"
+    "react-router": "^8.2.0"
   },
   "devDependencies": {
     "@peregrine-commit/eslint-config": "workspace:*",
