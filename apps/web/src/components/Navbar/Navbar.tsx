@@ -16,10 +16,10 @@ export const Navbar = ({ mode, toggleMode }: NavbarProps) => {
       activeHref={pathname}
       onNavigate={(href) => navigate(href)}
       links={[
-        { href: '/', label: 'Home' },
         { href: '/explore', label: 'Explore' },
         { href: '/experience', label: 'Experience' },
         { href: '/resume', label: 'Resume' },
+        {href: '/contact', label: 'Contact'},
       ]}
       ctaElement={
         <button

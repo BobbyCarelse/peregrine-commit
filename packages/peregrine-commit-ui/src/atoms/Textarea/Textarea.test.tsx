@@ -31,8 +31,26 @@ describe('Textarea', () => {
     expect(onChange).toHaveBeenCalledTimes(2);
   });
 
+  it('marks the field invalid and shows the error message', () => {
+    render(<Textarea label="Message" error="Message is required" />);
+    const textarea = screen.getByLabelText('Message');
+
+    expect(textarea).toHaveAttribute('aria-invalid', 'true');
+    expect(screen.getByText('Message is required')).toBeInTheDocument();
+  });
+
+  it('shows help text when there is no error', () => {
+    render(<Textarea label="Message" helpText="Markdown is supported" />);
+    expect(screen.getByText('Markdown is supported')).toBeInTheDocument();
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = render(<Textarea label="Message" />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('has no accessibility violations with an error', async () => {
+    const { container } = render(<Textarea label="Message" error="Message is required" />);
     expect(await axe(container)).toHaveNoViolations();
   });
 });

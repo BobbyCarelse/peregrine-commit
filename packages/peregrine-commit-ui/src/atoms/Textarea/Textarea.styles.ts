@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import type { SpacingProps } from '../../theme/spacingProps';
 import { spacingCss } from '../../theme/spacingProps';
 
-export const Label = styled.label<{ $spacing: SpacingProps }>`
+export const Field = styled.div<{ $spacing: SpacingProps }>`
   display: flex;
   flex-direction: column;
   gap: var(--stack-xs);
@@ -12,13 +12,13 @@ export const Label = styled.label<{ $spacing: SpacingProps }>`
   ${spacingCss}
 `;
 
-export const LabelText = styled.span`
+export const Label = styled.label`
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--color-text-primary);
 `;
 
-export const StyledTextarea = styled.textarea`
+export const StyledTextarea = styled.textarea<{ $hasError: boolean }>`
   padding: 10px var(--inset-sm);
   border-radius: var(--control-radius);
   border: 1.5px solid var(--color-border);
@@ -34,4 +34,19 @@ export const StyledTextarea = styled.textarea`
     border-color: var(--color-accent);
     box-shadow: var(--shadow-focus);
   }
+
+  ${({ $hasError }) =>
+    $hasError &&
+    css`
+      border-color: var(--color-danger);
+
+      &:focus-visible {
+        border-color: var(--color-danger);
+      }
+    `}
+`;
+
+export const HelpText = styled.span<{ $isError: boolean }>`
+  font-size: 0.75rem;
+  color: ${({ $isError }) => ($isError ? 'var(--color-danger)' : 'var(--color-text-secondary)')};
 `;
