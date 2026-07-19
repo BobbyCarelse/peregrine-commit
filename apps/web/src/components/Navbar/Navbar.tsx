@@ -1,4 +1,5 @@
 import { NavBar as BaseNavbar } from '@peregrine-commit/ui';
+import { useLocation, useNavigate } from 'react-router';
 import type { ThemeMode } from '../../hooks/useThemeMode';
 
 interface NavbarProps {
@@ -7,14 +8,18 @@ interface NavbarProps {
 }
 
 export const Navbar = ({ mode, toggleMode }: NavbarProps) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   return (
     <BaseNavbar
+      activeHref={pathname}
+      onNavigate={(href) => navigate(href)}
       links={[
         { href: '/', label: 'Home' },
-        { href: '/about', label: 'About' },
-        { href: '/services', label: 'Services' },
+        { href: '/explore', label: 'Explore' },
+        { href: '/experience', label: 'Experience' },
         { href: '/resume', label: 'Resume' },
-        { href: '/contact', label: 'Contact' },
       ]}
       ctaElement={
         <button

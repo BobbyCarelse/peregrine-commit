@@ -2,7 +2,7 @@ import { Box, Button, Container, SectionHeading, Stats } from '@peregrine-commit
 
 export const Hero = () => {
   return (
-    <Box background="bg">
+    <Box id="home" background="bg">
       <Container flex flexDirection="column" justifyContent="center" gap="space-6" py="space-24">
         <SectionHeading
           eyebrow="PEREGRINE COMMIT - SENIOR FULL-STACK ENGINEER"

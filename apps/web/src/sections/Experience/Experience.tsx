@@ -2,7 +2,7 @@ import { Box, Container, SectionHeading } from '@peregrine-commit/ui';
 
 export const Experience = () => {
   return (
-    <Box background="bg">
+    <Box id="experience" background="bg">
       <Container gap="space-6" py="space-24">
         <SectionHeading
           eyebrow="EXPERIENCE"

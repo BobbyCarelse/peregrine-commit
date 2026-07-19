@@ -2,7 +2,7 @@ import { Box, Container, SectionHeading } from '@peregrine-commit/ui';
 
 export const Resume = () => {
   return (
-    <Box background="surface-sunken">
+    <Box id="resume" background="surface-sunken">
       <Container gap="space-6" py="space-24" flex justifyContent="center" alignItems="center">
         <SectionHeading
           centered
