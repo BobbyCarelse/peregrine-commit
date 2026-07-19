@@ -19,7 +19,7 @@ export const Navbar = ({ mode, toggleMode }: NavbarProps) => {
         { href: '/explore', label: 'Explore' },
         { href: '/experience', label: 'Experience' },
         { href: '/resume', label: 'Resume' },
-        {href: '/contact', label: 'Contact'},
+        { href: '/contact', label: 'Contact' },
       ]}
       ctaElement={
         <button

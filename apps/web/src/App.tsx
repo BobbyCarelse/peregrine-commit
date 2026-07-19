@@ -25,7 +25,7 @@ export const App = () => {
       <Explore />
       <Experience />
       <Resume />
-      <Contact/>
+      <Contact />
     </AppLayout>
   );
 };

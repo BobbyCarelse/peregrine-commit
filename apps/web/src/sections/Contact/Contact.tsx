@@ -3,7 +3,6 @@ import { Formik } from 'formik';
 import { contactFormValidationSchema } from './Contact.validation';
 
 export const Contact = () => {
-
   function handleSubmit(values: any) {
     console.log(values);
   }
@@ -24,8 +23,21 @@ export const Contact = () => {
         >
           {({ handleSubmit, getFieldHelpers, getFieldMeta }) => (
             <Box gap="space-6" flex flexDirection="column">
-              <Input name="name" placeholder="Your Name" label="Name" {...getFieldHelpers('name')} {...getFieldMeta('name')} />
-              <Input type="email" name="email" placeholder="you@company.com" label="Email" {...getFieldHelpers('email')} {...getFieldMeta('email')} />
+              <Input
+                name="name"
+                placeholder="Your Name"
+                label="Name"
+                {...getFieldHelpers('name')}
+                {...getFieldMeta('name')}
+              />
+              <Input
+                type="email"
+                name="email"
+                placeholder="you@company.com"
+                label="Email"
+                {...getFieldHelpers('email')}
+                {...getFieldMeta('email')}
+              />
               <Input
                 name="phoneNumber"
                 placeholder="+27 81 345 6789"
@@ -38,7 +50,7 @@ export const Contact = () => {
                 placeholder="LinkedIn, Instagram etc"
                 label="How did you hear about me? (optional)"
                 {...getFieldHelpers('hearAboutMe')}
-                {...getFieldMeta('hearAboutMe')}    
+                {...getFieldMeta('hearAboutMe')}
               />
               <Textarea
                 name="description"
