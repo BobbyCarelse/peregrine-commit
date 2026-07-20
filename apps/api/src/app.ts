@@ -2,6 +2,7 @@ import express, { type NextFunction, type Request, type Response } from 'express
 
 import { rateLimiter } from './middleware/rateLimiter';
 import { healthRouter } from './routes/health';
+import { v1Router } from './routes/v1/v1';
 
 export const createApp = () => {
   const app = express();
@@ -10,6 +11,7 @@ export const createApp = () => {
   app.use(rateLimiter);
 
   app.use(healthRouter);
+  app.use('/v1', v1Router);
 
   app.use((_req: Request, res: Response) => {
     res.status(404).json({ error: 'Not found' });
