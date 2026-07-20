@@ -1,9 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import sgMail from '@sendgrid/mail';
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY ?? '');
+import { BirdClient } from '@messagebird/sdk';
 
 export type EmailTemplate = 'contact-confirmation' | 'contact-notification';
 
@@ -30,5 +28,17 @@ export const sendEmail = async ({
   variables,
 }: SendEmailOptions): Promise<void> => {
   const html = renderTemplate(template, variables);
-  await sgMail.send({ to, from, subject, html });
+
+  const BIRD_API_KEY = process.env.BIRD_API_KEY;
+
+  if (typeof BIRD_API_KEY !== 'string') throw new Error('Invalid Bird API Key Provided');
+
+  const bird = new BirdClient({ apiKey: BIRD_API_KEY });
+
+  await bird.email.send({
+    from,
+    to: [to],
+    subject,
+    html,
+  });
 };
