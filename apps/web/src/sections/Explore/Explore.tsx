@@ -1,4 +1,4 @@
-import { Box, Container, SectionHeading } from '@peregrine-commit/ui';
+import { Box, Container, Heading, SectionHeading } from '@peregrine-commit/ui';
 
 export const Explore = () => {
   return (
@@ -9,6 +9,9 @@ export const Explore = () => {
           title="Selected work"
           description="A sample of production systems I've built or rebuilt for clients."
         />
+        <Box flex justifyContent="center" alignItems="center">
+          <Heading>Coming Soon...</Heading>
+        </Box>
       </Container>
     </Box>
   );

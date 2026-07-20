@@ -1,4 +1,4 @@
-import { Box, Container, SectionHeading } from '@peregrine-commit/ui';
+import { Box, Container, Heading, SectionHeading } from '@peregrine-commit/ui';
 
 export const Experience = () => {
   return (
@@ -9,6 +9,10 @@ export const Experience = () => {
           title="Seven years, six industires"
           description="Independent consulting through Peregrine Commit, plus the roles that came before it."
         />
+
+        <Box flex justifyContent="center" alignItems="center">
+          <Heading>Coming Soon...</Heading>
+        </Box>
       </Container>
     </Box>
   );

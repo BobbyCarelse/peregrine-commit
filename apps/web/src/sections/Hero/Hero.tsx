@@ -22,7 +22,7 @@ export const Hero = () => {
           </Button>
         </Box>
         <Box flex gap="space-6">
-          <Stats stat="7+ yrs" description="In production" />
+          <Stats stat="8+ yrs" description="In production" />
           <Stats stat="6" description="Industries" />
           <Stats stat="Solo" description="No handoffs" />
         </Box>

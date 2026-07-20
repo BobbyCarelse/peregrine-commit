@@ -1,10 +1,35 @@
-import { Box, Button, Container, Input, SectionHeading, Textarea } from '@peregrine-commit/ui';
-import { Formik, type FormikValues } from 'formik';
+import { Box, Button, Container, Input, SectionHeading, Text, Textarea } from '@peregrine-commit/ui';
+import { Formik, type FormikHelpers } from 'formik';
+import { useState } from 'react';
+import { sendContactEmail } from '../../utils/email';
 import { contactFormValidationSchema } from './Contact.validation';
 
+interface ContactFormValues {
+  name: string;
+  email: string;
+  description: string;
+  phoneNumber: string;
+  hearAboutMe: string;
+}
+
 export const Contact = () => {
-  function handleSubmit(values: FormikValues) {
-    console.log(values);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  async function handleSubmit(values: ContactFormValues, { resetForm }: FormikHelpers<ContactFormValues>) {
+    setStatus('idle');
+    try {
+      await sendContactEmail({
+        name: values.name,
+        email: values.email,
+        description: values.description,
+        phoneNumber: values.phoneNumber,
+        hearAboutMe: values.hearAboutMe,
+      });
+      setStatus('success');
+      resetForm();
+    } catch {
+      setStatus('error');
+    }
   }
 
   return (
@@ -16,12 +41,12 @@ export const Contact = () => {
           title="Start a project"
           description="Tell me what you're building — I'll reply within a day."
         />
-        <Formik
+        <Formik<ContactFormValues>
           onSubmit={handleSubmit}
           initialValues={{ name: '', email: '', description: '', phoneNumber: '', hearAboutMe: '' }}
           validationSchema={contactFormValidationSchema}
         >
-          {({ handleSubmit, getFieldHelpers, getFieldMeta }) => (
+          {({ handleSubmit, isSubmitting, getFieldHelpers, getFieldMeta }) => (
             <Box gap="space-6" flex flexDirection="column">
               <Input
                 name="name"
@@ -61,13 +86,20 @@ export const Contact = () => {
               />
               <Button
                 type="submit"
+                disabled={isSubmitting}
                 onClick={(e) => {
                   e.preventDefault();
                   handleSubmit();
                 }}
               >
-                Send message
+                {isSubmitting ? 'Sending...' : 'Send message'}
               </Button>
+              {status === 'success' && (
+                <Text color="success">Thanks — your message is on its way to me.</Text>
+              )}
+              {status === 'error' && (
+                <Text color="danger">Something went wrong sending your message. Please try again.</Text>
+              )}
             </Box>
           )}
         </Formik>
