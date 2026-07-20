@@ -27,7 +27,7 @@ contactRouter.post('/', async (req, res) => {
         message: req?.body?.description,
       },
     });
-  } catch (error) {
+  } catch {
     throw new Error('Confirmation Email failed');
   }
 
@@ -45,7 +45,7 @@ contactRouter.post('/', async (req, res) => {
         hearAboutMe: req?.body?.hearAboutMe ?? 'N/A',
       },
     });
-  } catch (error) {
+  } catch {
     throw new Error('Notification Email failed');
   }
 
