@@ -17,6 +17,9 @@ importers:
 
   apps/api:
     dependencies:
+      '@sendgrid/mail':
+        specifier: ^8.1.6
+        version: 8.1.6
       express:
         specifier: ^5.2.1
         version: 5.2.1
@@ -99,7 +102,7 @@ importers:
         version: 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.9.5)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.18(prettier@3.9.5))(typescript@5.9.3)
       '@storybook/react-vite':
         specifier: 8.6.18
-        version: 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.9.5)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.62.2)(storybook@8.6.18(prettier@3.9.5))(typescript@5.9.3)(vite@6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1))
+        version: 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.9.5)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.62.2)(storybook@8.6.18(prettier@3.9.5))(typescript@5.9.3)(vite@6.4.3(@types/node@26.1.1)(lightningcss@1.32.0)(tsx@4.23.1))
       '@storybook/test':
         specifier: 8.6.18
         version: 8.6.18(storybook@8.6.18(prettier@3.9.5))
@@ -123,13 +126,13 @@ importers:
         version: 18.3.7(@types/react@18.3.31)
       '@vitejs/plugin-react':
         specifier: ^4.7.0
-        version: 4.7.0(vite@6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1))
+        version: 4.7.0(vite@6.4.3(@types/node@26.1.1)(lightningcss@1.32.0)(tsx@4.23.1))
       eslint:
         specifier: ^9.17.0
         version: 9.39.5
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.25.12))
+        version: 30.4.2(@types/node@26.1.1)(esbuild-register@3.6.0(esbuild@0.28.1))
       jest-environment-jsdom:
         specifier: ^30.4.1
         version: 30.4.1
@@ -138,13 +141,13 @@ importers:
         version: 8.6.18(prettier@3.9.5)
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.7)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.7))(esbuild@0.25.12)(jest-util@30.4.1)(jest@30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.25.12)))(typescript@5.9.3)
+        version: 29.4.11(@babel/core@7.29.7)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.7))(esbuild@0.28.1)(jest-util@30.4.1)(jest@30.4.2(@types/node@26.1.1)(esbuild-register@3.6.0(esbuild@0.28.1)))(typescript@5.9.3)
       typescript:
         specifier: ^5.7.2
         version: 5.9.3
       vite:
         specifier: ^6.4.3
-        version: 6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1)
+        version: 6.4.3(@types/node@26.1.1)(lightningcss@1.32.0)(tsx@4.23.1)
 
   packages/eslint-config:
     dependencies:
@@ -1511,6 +1514,18 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@sendgrid/client@8.1.6':
+    resolution: {integrity: sha512-/BHu0hqwXNHr2aLhcXU7RmmlVqrdfrbY9KpaNj00KZHlVOVoRxRVrpOCabIB+91ISXJ6+mLM9vpaVUhK6TwBWA==}
+    engines: {node: '>=12.*'}
+
+  '@sendgrid/helpers@8.0.0':
+    resolution: {integrity: sha512-Ze7WuW2Xzy5GT5WRx+yEv89fsg/pgy3T1E3FS0QEx0/VvRmigMZ5qyVGhJz4SxomegDkzXv/i0aFPpHKN8qdAA==}
+    engines: {node: '>= 12.0.0'}
+
+  '@sendgrid/mail@8.1.6':
+    resolution: {integrity: sha512-/ZqxUvKeEztU9drOoPC/8opEPOk+jLlB2q4+xpx6HVLq6aFu3pMpalkTpAQz8XfRfpLp8O25bh6pGPcHDCYpqg==}
+    engines: {node: '>=12.*'}
+
   '@sinclair/typebox@0.27.10':
     resolution: {integrity: sha512-MTBk/3jGLNB2tVxv6uLlFh1iu64iYOQ2PbdOSK3NW8JZsmlaOh2q6sdtKowBhfw8QFLmYNzTW4/oK4uATIi6ZA==}
 
@@ -2138,6 +2153,10 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  agent-base@6.0.2:
+    resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
+    engines: {node: '>= 6.0.0'}
+
   agent-base@7.1.4:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
     engines: {node: '>= 14'}
@@ -2253,6 +2272,9 @@ packages:
   axe-core@4.9.1:
     resolution: {integrity: sha512-QbUdXJVTpvUTHU7871ppZkdOLBeGUKBQWHkHrvN2V9IQWGMt61zf3B45BtzjxEJzYuj0JBjBZP/hmYS/R9pmAw==}
     engines: {node: '>=4'}
+
+  axios@1.18.1:
+    resolution: {integrity: sha512-3nTvFlvpn9Zu/RkHUqtc7/+al4UpRW5az71ap5zccp6e8RAYEzhMTecX8Dz1wWDYrPpUoB1HAQEGEAEvUr7S9g==}
 
   axobject-query@4.1.0:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
@@ -2872,6 +2894,15 @@ packages:
   flatted@3.4.2:
     resolution: {integrity: sha512-PjDse7RzhcPkIJwy5t7KPWQSZ9cAbzQXcafsetQoD7sOJRQlGikNbx7yZp2OotDnJyrDcbyRq3Ttb18iYOqkxA==}
 
+  follow-redirects@1.16.0:
+    resolution: {integrity: sha512-y5rN/uOsadFT/JfYwhxRS5R7Qce+g3zG97+JrtFZlC9klX/W5hD7iiLzScI4nZqUS7DNUdhPgw4xI8W2LuXlUw==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+
   for-each@0.3.5:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
     engines: {node: '>= 0.4'}
@@ -3037,6 +3068,10 @@ packages:
   http-proxy-agent@7.0.2:
     resolution: {integrity: sha512-T1gkAiYYDWYx3V5Bmyu7HcfcvL7mUrTWiM6yOfa3PIphViJ/gFPbvidQ+veqSOHci/PxBcDabeUNCzpOODJZig==}
     engines: {node: '>= 14'}
+
+  https-proxy-agent@5.0.1:
+    resolution: {integrity: sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==}
+    engines: {node: '>= 6'}
 
   https-proxy-agent@7.0.6:
     resolution: {integrity: sha512-vK9P5/iUfdl95AI+JVyUuIcVtd4ofvtrOr3HNtM2yxC9bnMbEdp3x01OhQNnjb8IJYi38VlTE3mBXwcfvywuSw==}
@@ -3983,6 +4018,10 @@ packages:
   proxy-addr@2.0.7:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
+
+  proxy-from-env@2.1.0:
+    resolution: {integrity: sha512-cJ+oHTW1VAEa8cJslgmUZrc+sjRKgAKl3Zyse6+PV38hZe/V6Z14TbCuXcan9F9ghlz4QrFr2c92TNF82UkYHA==}
+    engines: {node: '>=10'}
 
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
@@ -5483,42 +5522,6 @@ snapshots:
       jest-util: 30.4.1
       slash: 3.0.0
 
-  '@jest/core@30.4.2(esbuild-register@3.6.0(esbuild@0.25.12))':
-    dependencies:
-      '@jest/console': 30.4.1
-      '@jest/pattern': 30.4.0
-      '@jest/reporters': 30.4.1
-      '@jest/test-result': 30.4.1
-      '@jest/transform': 30.4.1
-      '@jest/types': 30.4.1
-      '@types/node': 22.20.1
-      ansi-escapes: 4.3.2
-      chalk: 4.1.2
-      ci-info: 4.4.0
-      exit-x: 0.2.2
-      fast-json-stable-stringify: 2.1.0
-      graceful-fs: 4.2.11
-      jest-changed-files: 30.4.1
-      jest-config: 30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.25.12))
-      jest-haste-map: 30.4.1
-      jest-message-util: 30.4.1
-      jest-regex-util: 30.4.0
-      jest-resolve: 30.4.1
-      jest-resolve-dependencies: 30.4.2
-      jest-runner: 30.4.2
-      jest-runtime: 30.4.2
-      jest-snapshot: 30.4.1
-      jest-util: 30.4.1
-      jest-validate: 30.4.1
-      jest-watcher: 30.4.1
-      pretty-format: 30.4.1
-      slash: 3.0.0
-    transitivePeerDependencies:
-      - babel-plugin-macros
-      - esbuild-register
-      - supports-color
-      - ts-node
-
   '@jest/core@30.4.2(esbuild-register@3.6.0(esbuild@0.28.1))':
     dependencies:
       '@jest/console': 30.4.1
@@ -5703,15 +5706,6 @@ snapshots:
       '@types/yargs': 17.0.35
       chalk: 4.1.2
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.5.0(typescript@5.9.3)(vite@6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1))':
-    dependencies:
-      glob: 10.5.0
-      magic-string: 0.27.0
-      react-docgen-typescript: 2.4.0(typescript@5.9.3)
-      vite: 6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1)
-    optionalDependencies:
-      typescript: 5.9.3
-
   '@joshwooding/vite-plugin-react-docgen-typescript@0.5.0(typescript@5.9.3)(vite@6.4.3(@types/node@26.1.1)(lightningcss@1.32.0)(tsx@4.23.1))':
     dependencies:
       glob: 10.5.0
@@ -5849,6 +5843,26 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.62.2':
     optional: true
 
+  '@sendgrid/client@8.1.6':
+    dependencies:
+      '@sendgrid/helpers': 8.0.0
+      axios: 1.18.1
+    transitivePeerDependencies:
+      - debug
+      - supports-color
+
+  '@sendgrid/helpers@8.0.0':
+    dependencies:
+      deepmerge: 4.3.1
+
+  '@sendgrid/mail@8.1.6':
+    dependencies:
+      '@sendgrid/client': 8.1.6
+      '@sendgrid/helpers': 8.0.0
+    transitivePeerDependencies:
+      - debug
+      - supports-color
+
   '@sinclair/typebox@0.27.10': {}
 
   '@sinclair/typebox@0.34.52': {}
@@ -5956,14 +5970,6 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@8.6.18(storybook@8.6.18(prettier@3.9.5))(vite@6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1))':
-    dependencies:
-      '@storybook/csf-plugin': 8.6.18(storybook@8.6.18(prettier@3.9.5))
-      browser-assert: 1.2.1
-      storybook: 8.6.18(prettier@3.9.5)
-      ts-dedent: 2.3.0
-      vite: 6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1)
-
   '@storybook/builder-vite@8.6.18(storybook@8.6.18(prettier@3.9.5))(vite@6.4.3(@types/node@26.1.1)(lightningcss@1.32.0)(tsx@4.23.1))':
     dependencies:
       '@storybook/csf-plugin': 8.6.18(storybook@8.6.18(prettier@3.9.5))
@@ -6051,28 +6057,6 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.6.18(prettier@3.9.5)
-
-  '@storybook/react-vite@8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.9.5)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.62.2)(storybook@8.6.18(prettier@3.9.5))(typescript@5.9.3)(vite@6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1))':
-    dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.5.0(typescript@5.9.3)(vite@6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1))
-      '@rollup/pluginutils': 5.4.0(rollup@4.62.2)
-      '@storybook/builder-vite': 8.6.18(storybook@8.6.18(prettier@3.9.5))(vite@6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1))
-      '@storybook/react': 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.9.5)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.18(prettier@3.9.5))(typescript@5.9.3)
-      find-up: 5.0.0
-      magic-string: 0.30.21
-      react: 18.3.1
-      react-docgen: 7.1.1
-      react-dom: 18.3.1(react@18.3.1)
-      resolve: 1.22.12
-      storybook: 8.6.18(prettier@3.9.5)
-      tsconfig-paths: 4.2.0
-      vite: 6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1)
-    optionalDependencies:
-      '@storybook/test': 8.6.18(storybook@8.6.18(prettier@3.9.5))
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-      - typescript
 
   '@storybook/react-vite@8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.9.5)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.62.2)(storybook@8.6.18(prettier@3.9.5))(typescript@5.9.3)(vite@6.4.3(@types/node@26.1.1)(lightningcss@1.32.0)(tsx@4.23.1))':
     dependencies:
@@ -6509,18 +6493,6 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.12.2':
     optional: true
 
-  '@vitejs/plugin-react@4.7.0(vite@6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1))':
-    dependencies:
-      '@babel/core': 7.29.7
-      '@babel/plugin-transform-react-jsx-self': 7.29.7(@babel/core@7.29.7)
-      '@babel/plugin-transform-react-jsx-source': 7.29.7(@babel/core@7.29.7)
-      '@rolldown/pluginutils': 1.0.0-beta.27
-      '@types/babel__core': 7.20.5
-      react-refresh: 0.17.0
-      vite: 6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1)
-    transitivePeerDependencies:
-      - supports-color
-
   '@vitejs/plugin-react@4.7.0(vite@6.4.3(@types/node@26.1.1)(lightningcss@1.32.0)(tsx@4.23.1))':
     dependencies:
       '@babel/core': 7.29.7
@@ -6605,6 +6577,12 @@ snapshots:
       acorn: 8.17.0
 
   acorn@8.17.0: {}
+
+  agent-base@6.0.2:
+    dependencies:
+      debug: 4.4.3
+    transitivePeerDependencies:
+      - supports-color
 
   agent-base@7.1.4: {}
 
@@ -6730,6 +6708,16 @@ snapshots:
   axe-core@4.12.1: {}
 
   axe-core@4.9.1: {}
+
+  axios@1.18.1:
+    dependencies:
+      follow-redirects: 1.16.0
+      form-data: 4.0.6
+      https-proxy-agent: 5.0.1
+      proxy-from-env: 2.1.0
+    transitivePeerDependencies:
+      - debug
+      - supports-color
 
   axobject-query@4.1.0: {}
 
@@ -7581,6 +7569,8 @@ snapshots:
 
   flatted@3.4.2: {}
 
+  follow-redirects@1.16.0: {}
+
   for-each@0.3.5:
     dependencies:
       is-callable: 1.2.7
@@ -7767,6 +7757,13 @@ snapshots:
   http-proxy-agent@7.0.2:
     dependencies:
       agent-base: 7.1.4
+      debug: 4.4.3
+    transitivePeerDependencies:
+      - supports-color
+
+  https-proxy-agent@5.0.1:
+    dependencies:
+      agent-base: 6.0.2
       debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
@@ -8045,25 +8042,6 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  jest-cli@30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.25.12)):
-    dependencies:
-      '@jest/core': 30.4.2(esbuild-register@3.6.0(esbuild@0.25.12))
-      '@jest/test-result': 30.4.1
-      '@jest/types': 30.4.1
-      chalk: 4.1.2
-      exit-x: 0.2.2
-      import-local: 3.2.0
-      jest-config: 30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.25.12))
-      jest-util: 30.4.1
-      jest-validate: 30.4.1
-      yargs: 17.7.3
-    transitivePeerDependencies:
-      - '@types/node'
-      - babel-plugin-macros
-      - esbuild-register
-      - supports-color
-      - ts-node
-
   jest-cli@30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.28.1)):
     dependencies:
       '@jest/core': 30.4.2(esbuild-register@3.6.0(esbuild@0.28.1))
@@ -8083,37 +8061,24 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest-config@30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.25.12)):
+  jest-cli@30.4.2(@types/node@26.1.1)(esbuild-register@3.6.0(esbuild@0.28.1)):
     dependencies:
-      '@babel/core': 7.29.7
-      '@jest/get-type': 30.1.0
-      '@jest/pattern': 30.4.0
-      '@jest/test-sequencer': 30.4.1
+      '@jest/core': 30.4.2(esbuild-register@3.6.0(esbuild@0.28.1))
+      '@jest/test-result': 30.4.1
       '@jest/types': 30.4.1
-      babel-jest: 30.4.1(@babel/core@7.29.7)
       chalk: 4.1.2
-      ci-info: 4.4.0
-      deepmerge: 4.3.1
-      glob: 10.5.0
-      graceful-fs: 4.2.11
-      jest-circus: 30.4.2
-      jest-docblock: 30.4.0
-      jest-environment-node: 30.4.1
-      jest-regex-util: 30.4.0
-      jest-resolve: 30.4.1
-      jest-runner: 30.4.2
+      exit-x: 0.2.2
+      import-local: 3.2.0
+      jest-config: 30.4.2(@types/node@26.1.1)(esbuild-register@3.6.0(esbuild@0.28.1))
       jest-util: 30.4.1
       jest-validate: 30.4.1
-      parse-json: 5.2.0
-      pretty-format: 30.4.1
-      slash: 3.0.0
-      strip-json-comments: 3.1.1
-    optionalDependencies:
-      '@types/node': 22.20.1
-      esbuild-register: 3.6.0(esbuild@0.25.12)
+      yargs: 17.7.3
     transitivePeerDependencies:
+      - '@types/node'
       - babel-plugin-macros
+      - esbuild-register
       - supports-color
+      - ts-node
 
   jest-config@30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.28.1)):
     dependencies:
@@ -8142,6 +8107,38 @@ snapshots:
       strip-json-comments: 3.1.1
     optionalDependencies:
       '@types/node': 22.20.1
+      esbuild-register: 3.6.0(esbuild@0.28.1)
+    transitivePeerDependencies:
+      - babel-plugin-macros
+      - supports-color
+
+  jest-config@30.4.2(@types/node@26.1.1)(esbuild-register@3.6.0(esbuild@0.28.1)):
+    dependencies:
+      '@babel/core': 7.29.7
+      '@jest/get-type': 30.1.0
+      '@jest/pattern': 30.4.0
+      '@jest/test-sequencer': 30.4.1
+      '@jest/types': 30.4.1
+      babel-jest: 30.4.1(@babel/core@7.29.7)
+      chalk: 4.1.2
+      ci-info: 4.4.0
+      deepmerge: 4.3.1
+      glob: 10.5.0
+      graceful-fs: 4.2.11
+      jest-circus: 30.4.2
+      jest-docblock: 30.4.0
+      jest-environment-node: 30.4.1
+      jest-regex-util: 30.4.0
+      jest-resolve: 30.4.1
+      jest-runner: 30.4.2
+      jest-util: 30.4.1
+      jest-validate: 30.4.1
+      parse-json: 5.2.0
+      pretty-format: 30.4.1
+      slash: 3.0.0
+      strip-json-comments: 3.1.1
+    optionalDependencies:
+      '@types/node': 26.1.1
       esbuild-register: 3.6.0(esbuild@0.28.1)
     transitivePeerDependencies:
       - babel-plugin-macros
@@ -8389,12 +8386,12 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jest@30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.25.12)):
+  jest@30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.28.1)):
     dependencies:
-      '@jest/core': 30.4.2(esbuild-register@3.6.0(esbuild@0.25.12))
+      '@jest/core': 30.4.2(esbuild-register@3.6.0(esbuild@0.28.1))
       '@jest/types': 30.4.1
       import-local: 3.2.0
-      jest-cli: 30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.25.12))
+      jest-cli: 30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.28.1))
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -8402,12 +8399,12 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest@30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.28.1)):
+  jest@30.4.2(@types/node@26.1.1)(esbuild-register@3.6.0(esbuild@0.28.1)):
     dependencies:
       '@jest/core': 30.4.2(esbuild-register@3.6.0(esbuild@0.28.1))
       '@jest/types': 30.4.1
       import-local: 3.2.0
-      jest-cli: 30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.28.1))
+      jest-cli: 30.4.2(@types/node@26.1.1)(esbuild-register@3.6.0(esbuild@0.28.1))
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -8932,6 +8929,8 @@ snapshots:
     dependencies:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
+
+  proxy-from-env@2.1.0: {}
 
   punycode@2.3.1: {}
 
@@ -9481,12 +9480,12 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-jest@29.4.11(@babel/core@7.29.7)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.7))(esbuild@0.25.12)(jest-util@30.4.1)(jest@30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.25.12)))(typescript@5.9.3):
+  ts-jest@29.4.11(@babel/core@7.29.7)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.7))(esbuild@0.28.1)(jest-util@30.4.1)(jest@30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.28.1)))(typescript@5.9.3):
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       handlebars: 4.7.9
-      jest: 30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.25.12))
+      jest: 30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.28.1))
       json5: 2.2.3
       lodash.memoize: 4.1.2
       make-error: 1.3.6
@@ -9499,15 +9498,15 @@ snapshots:
       '@jest/transform': 30.4.1
       '@jest/types': 30.4.1
       babel-jest: 30.4.1(@babel/core@7.29.7)
-      esbuild: 0.25.12
+      esbuild: 0.28.1
       jest-util: 30.4.1
 
-  ts-jest@29.4.11(@babel/core@7.29.7)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.7))(esbuild@0.28.1)(jest-util@30.4.1)(jest@30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.28.1)))(typescript@5.9.3):
+  ts-jest@29.4.11(@babel/core@7.29.7)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.7))(esbuild@0.28.1)(jest-util@30.4.1)(jest@30.4.2(@types/node@26.1.1)(esbuild-register@3.6.0(esbuild@0.28.1)))(typescript@5.9.3):
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       handlebars: 4.7.9
-      jest: 30.4.2(@types/node@22.20.1)(esbuild-register@3.6.0(esbuild@0.28.1))
+      jest: 30.4.2(@types/node@26.1.1)(esbuild-register@3.6.0(esbuild@0.28.1))
       json5: 2.2.3
       lodash.memoize: 4.1.2
       make-error: 1.3.6
@@ -9744,20 +9743,6 @@ snapshots:
       '@types/node': 26.1.1
       fsevents: 2.3.3
       lightningcss: 1.32.0
-
-  vite@6.4.3(@types/node@22.20.1)(lightningcss@1.32.0)(tsx@4.23.1):
-    dependencies:
-      esbuild: 0.25.12
-      fdir: 6.5.0(picomatch@4.0.5)
-      picomatch: 4.0.5
-      postcss: 8.5.19
-      rollup: 4.62.2
-      tinyglobby: 0.2.17
-    optionalDependencies:
-      '@types/node': 22.20.1
-      fsevents: 2.3.3
-      lightningcss: 1.32.0
-      tsx: 4.23.1
 
   vite@6.4.3(@types/node@26.1.1)(lightningcss@1.32.0)(tsx@4.23.1):
     dependencies:
