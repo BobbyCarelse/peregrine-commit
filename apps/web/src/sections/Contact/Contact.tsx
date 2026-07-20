@@ -1,14 +1,13 @@
 import {
-  Box,
-  Button,
-  Container,
-  Input,
-  SectionHeading,
-  Text,
-  Textarea,
+    Box,
+    Button,
+    Container,
+    SectionHeading,
+    Text,
 } from '@peregrine-commit/ui';
 import { Formik, type FormikHelpers } from 'formik';
 import { useState } from 'react';
+import { Input, Textarea } from '../../formik-components';
 import { sendContactEmail } from '../../utils/email';
 import { contactFormValidationSchema } from './Contact.validation';
 
@@ -71,34 +70,26 @@ export const Contact = () => {
                 name="email"
                 placeholder="you@company.com"
                 label="Email"
-                {...getFieldHelpers('email')}
-                {...getFieldMeta('email')}
               />
               <Input
                 name="phoneNumber"
                 placeholder="+27 81 345 6789"
                 label="Phone number (optional)"
-                {...getFieldHelpers('phoneNumber')}
-                {...getFieldMeta('phoneNumber')}
               />
               <Input
                 name="hearAboutMe"
                 placeholder="LinkedIn, Instagram etc"
                 label="How did you hear about me? (optional)"
-                {...getFieldHelpers('hearAboutMe')}
-                {...getFieldMeta('hearAboutMe')}
               />
               <Textarea
                 name="description"
                 placeholder="Tell me about the project?"
                 label="Project details"
-                {...getFieldHelpers('description')}
-                {...getFieldMeta('description')}
               />
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                onClick={(e) => {
+                onClick={(e: { preventDefault: () => void; }) => {
                   e.preventDefault();
                   handleSubmit();
                 }}
