@@ -19,7 +19,7 @@ contactRouter.post('/', async (req, res) => {
   try {
     await sendEmail({
       to: req?.body?.email,
-      from: 'bobbycarelse@gmail.com',
+      from: 'hello@peregrinecommit.com',
       subject: `Thanks ${req?.body?.name}, I've got it`,
       template: 'contact-confirmation',
       variables: {
@@ -34,7 +34,7 @@ contactRouter.post('/', async (req, res) => {
   try {
     await sendEmail({
       to: 'bobbycarelse@gmail.com',
-      from: 'bobbycarelse@gmail.com',
+      from: 'hello@peregrinecommit.com',
       subject: 'Peregrine Commit - Notification',
       template: 'contact-notification',
       variables: {
