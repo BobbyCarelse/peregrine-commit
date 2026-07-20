@@ -74,7 +74,7 @@ jobs:
           DB_NAME=${{ secrets.API_DB_NAME }}
           DB_USER=${{ secrets.API_DB_USER }}
           DB_PASSWORD=${{ secrets.API_DB_PASSWORD }}
-          SENDGRID_API_KEY=${{ secrets.API_SENDGRID_API_KEY }}
+          BIRD_API_KEY=${{ secrets.API_BIRD_API_KEY }}
           EOF
           chmod 600 api.env
           scp -p api.env ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:~/peregrine-commit/.env
