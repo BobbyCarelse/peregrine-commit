@@ -22,7 +22,13 @@ interface SendEmailOptions {
   variables: Record<string, string>;
 }
 
-export const sendEmail = async ({ to, from, subject, template, variables }: SendEmailOptions): Promise<void> => {
+export const sendEmail = async ({
+  to,
+  from,
+  subject,
+  template,
+  variables,
+}: SendEmailOptions): Promise<void> => {
   const html = renderTemplate(template, variables);
   await sgMail.send({ to, from, subject, html });
 };

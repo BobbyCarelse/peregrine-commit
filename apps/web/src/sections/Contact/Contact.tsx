@@ -1,4 +1,12 @@
-import { Box, Button, Container, Input, SectionHeading, Text, Textarea } from '@peregrine-commit/ui';
+import {
+  Box,
+  Button,
+  Container,
+  Input,
+  SectionHeading,
+  Text,
+  Textarea,
+} from '@peregrine-commit/ui';
 import { Formik, type FormikHelpers } from 'formik';
 import { useState } from 'react';
 import { sendContactEmail } from '../../utils/email';
@@ -15,7 +23,10 @@ interface ContactFormValues {
 export const Contact = () => {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  async function handleSubmit(values: ContactFormValues, { resetForm }: FormikHelpers<ContactFormValues>) {
+  async function handleSubmit(
+    values: ContactFormValues,
+    { resetForm }: FormikHelpers<ContactFormValues>,
+  ) {
     setStatus('idle');
     try {
       await sendContactEmail({
@@ -98,7 +109,9 @@ export const Contact = () => {
                 <Text color="success">Thanks — your message is on its way to me.</Text>
               )}
               {status === 'error' && (
-                <Text color="danger">Something went wrong sending your message. Please try again.</Text>
+                <Text color="danger">
+                  Something went wrong sending your message. Please try again.
+                </Text>
               )}
             </Box>
           )}

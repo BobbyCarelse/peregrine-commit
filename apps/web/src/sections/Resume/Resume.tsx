@@ -2,7 +2,6 @@ import { Box, Button, Container, SectionHeading, Text } from '@peregrine-commit/
 import resumePdf from '../../utils/resume.pdf';
 
 export const Resume = () => {
-
   function onDownloadResume(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
 
@@ -14,7 +13,14 @@ export const Resume = () => {
 
   return (
     <Box id="resume" background="surface-sunken">
-      <Container gap="space-6" py="space-24" flex justifyContent="center" alignItems="center" flexDirection="column">
+      <Container
+        gap="space-6"
+        py="space-24"
+        flex
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column"
+      >
         <SectionHeading
           centered
           eyebrow="RESUME"
@@ -23,7 +29,9 @@ export const Resume = () => {
         />
         <Box flex justifyContent="center" alignItems="center" gap="space-3" flexDirection="column">
           <Button onClick={onDownloadResume}>Download Resume</Button>
-          <Text variant='body' size='sm' color='secondary'>Bobby Carelse - Senior Fullstack Engineer</Text>
+          <Text variant="body" size="sm" color="secondary">
+            Bobby Carelse - Senior Fullstack Engineer
+          </Text>
         </Box>
       </Container>
     </Box>
