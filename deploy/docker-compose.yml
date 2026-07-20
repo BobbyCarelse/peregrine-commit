@@ -3,6 +3,8 @@ services:
     build:
       context: ..
       dockerfile: apps/web/Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
     image: ghcr.io/bobbycarelse/peregrine-commit-web:latest
     restart: unless-stopped
     ports:
