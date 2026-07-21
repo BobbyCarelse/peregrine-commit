@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { BirdClient } from '@messagebird/sdk';
+import { SendEmailCommand, SendEmailCommandOutput, SESClient } from '@aws-sdk/client-ses';
 
 export type EmailTemplate = 'contact-confirmation' | 'contact-notification';
 
@@ -26,19 +26,39 @@ export const sendEmail = async ({
   subject,
   template,
   variables,
-}: SendEmailOptions): Promise<void> => {
+}: SendEmailOptions): Promise<SendEmailCommandOutput> => {
   const html = renderTemplate(template, variables);
 
-  const BIRD_API_KEY = process.env.BIRD_API_KEY;
+  const AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+  const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
+  const AWS_REGION = process.env.AWS_REGION;
 
-  if (typeof BIRD_API_KEY !== 'string') throw new Error('Invalid Bird API Key Provided');
+  if (typeof AWS_ACCESS_KEY !== 'string' || typeof AWS_SECRET_ACCESS_KEY !== 'string')
+    throw new Error('Invalid Email Credentials');
 
-  const bird = new BirdClient({ apiKey: BIRD_API_KEY });
+  const sesClient = new SESClient([
+    {
+      region: AWS_REGION,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      },
+    },
+  ]);
 
-  await bird.email.send({
-    from,
-    to: [to],
-    subject,
-    html,
+  const emailCommand = new SendEmailCommand({
+    Message: {
+      Body: {
+        Html: { Data: html, Charset: 'UTF-8' },
+        Text: { Data: html, Charset: 'UTF-8' },
+      },
+      Subject: { Data: subject, Charset: 'UTF-8' },
+    },
+    Destination: {
+      ToAddresses: [to],
+    },
+    Source: from,
   });
+
+  return sesClient.send(emailCommand);
 };
