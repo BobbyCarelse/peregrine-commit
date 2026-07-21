@@ -31,8 +31,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build images
-        env:
-          VITE_API_URL: ${{ vars.VITE_API_URL }}
         run: docker compose -f deploy/docker-compose.yml build
 
       - name: Push images
