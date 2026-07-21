@@ -16,10 +16,18 @@ contactRouter.post('/', async (req, res) => {
     return res.status(400).json({ error: 'Description is required' });
   }
 
+  const FROM_EMAIL_ADDRESS = process.env.FROM_EMAIL_ADDRESS;
+
+  if (typeof FROM_EMAIL_ADDRESS !== 'string') {
+    return res
+      .status(400)
+      .json({ error: 'Email sending failed. Please try the email button in footer' });
+  }
+
   try {
     await sendEmail({
       to: req?.body?.email,
-      from: 'hello@peregrinecommit.com',
+      from: FROM_EMAIL_ADDRESS,
       subject: `Thanks ${req?.body?.name}, I've got it`,
       template: 'contact-confirmation',
       variables: {
@@ -34,7 +42,7 @@ contactRouter.post('/', async (req, res) => {
   try {
     await sendEmail({
       to: 'bobbycarelse@gmail.com',
-      from: 'hello@peregrinecommit.com',
+      from: FROM_EMAIL_ADDRESS,
       subject: 'Peregrine Commit - Notification',
       template: 'contact-notification',
       variables: {
