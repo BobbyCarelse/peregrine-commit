@@ -1,4 +1,4 @@
-require('./instrument.js');
+import './instrument';
 
 import Sentry from '@sentry/node';
 import { createApp } from './app';

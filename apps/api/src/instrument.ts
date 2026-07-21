@@ -1,6 +1,5 @@
-// Import with `import * as Sentry from "@sentry/node"` if you are using ESM
-const Sentry = require('@sentry/node');
-const { nodeProfilingIntegration } = require('@sentry/profiling-node');
+import Sentry from '@sentry/node';
+import { nodeProfilingIntegration } from '@sentry/profiling-node';
 
 Sentry.init({
   dsn: 'https://1a932324eb11a2f1a66b005612901029@o392813.ingest.us.sentry.io/4511775628394496',
