@@ -35,8 +35,9 @@ contactRouter.post('/', async (req, res) => {
         message: req?.body?.description,
       },
     });
-  } catch {
-    throw new Error('Confirmation Email failed');
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({ error: 'Confirmation Email failed' });
   }
 
   try {
@@ -53,8 +54,9 @@ contactRouter.post('/', async (req, res) => {
         hearAboutMe: req?.body?.hearAboutMe ?? 'N/A',
       },
     });
-  } catch {
-    throw new Error('Notification Email failed');
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({ error: 'Notification Email failed' });
   }
 
   return res.status(200).json({ message: 'Contact form submitted successfully' });
