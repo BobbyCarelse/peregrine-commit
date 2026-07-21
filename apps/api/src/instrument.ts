@@ -5,6 +5,7 @@ Sentry.init({
 
   // Send structured logs to Sentry
   enableLogs: true,
+  integrations: [Sentry.consoleLoggingIntegration({ levels: ['log', 'warn', 'error'] })],
   // Tracing
   tracesSampleRate: 1.0, //  Capture 100% of the transactions
   dataCollection: {

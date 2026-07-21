@@ -1,5 +1,6 @@
 import express, { type NextFunction, type Request, type Response } from 'express';
 
+import Sentry from '@sentry/node';
 import cors from 'cors';
 import { rateLimiter } from './middleware/rateLimiter';
 import { healthRouter } from './routes/health';
@@ -11,6 +12,8 @@ export const createApp = () => {
   app.use(express.json());
   app.use(rateLimiter);
   app.use(cors());
+
+  Sentry.setupExpressErrorHandler(app);
 
   app.use(healthRouter);
   app.use('/v1', v1Router);
