@@ -16,7 +16,6 @@
   "dependencies": {
     "@aws-sdk/client-ses": "^3.1092.0",
     "@sentry/node": "^10.67.0",
-    "@sentry/profiling-node": "^10.67.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "express-rate-limit": "^8.5.2"
