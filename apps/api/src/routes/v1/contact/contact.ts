@@ -1,9 +1,10 @@
 import { Router } from 'express';
+import { contactRateLimiter } from '../../../middleware/contactRateLimiter';
 import { sendEmail } from '../../../utils/email';
 
 export const contactRouter = Router();
 
-contactRouter.post('/', async (req, res) => {
+contactRouter.post('/', contactRateLimiter, async (req, res) => {
   if (typeof req?.body?.name !== 'string' || req.body.name.trim() === '') {
     return res.status(400).json({ error: 'Name is required' });
   }
