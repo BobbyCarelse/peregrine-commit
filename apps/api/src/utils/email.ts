@@ -36,15 +36,13 @@ export const sendEmail = async ({
   if (typeof AWS_ACCESS_KEY !== 'string' || typeof AWS_SECRET_ACCESS_KEY !== 'string')
     throw new Error('Invalid Email Credentials');
 
-  const sesClient = new SESClient([
-    {
-      region: AWS_REGION,
-      credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      },
+  const sesClient = new SESClient({
+    region: AWS_REGION,
+    credentials: {
+      accessKeyId: AWS_ACCESS_KEY,
+      secretAccessKey: AWS_SECRET_ACCESS_KEY,
     },
-  ]);
+  });
 
   const emailCommand = new SendEmailCommand({
     Message: {
