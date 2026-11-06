@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import { css, styled } from 'styled-components';
 
 import type { FontWeightToken } from '../../theme/fontWeightProps';
 import { fontWeightVar } from '../../theme/fontWeightProps';
