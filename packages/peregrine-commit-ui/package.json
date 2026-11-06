@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BobbyCarelse/peregrine-commit.git",
+    "url": "git+https://github.com/Peregrine-Commit/peregrine-commit.git",
     "directory": "packages/peregrine-commit-ui"
   },
   "publishConfig": {

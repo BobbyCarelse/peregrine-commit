@@ -64,10 +64,9 @@ registry the workflow skips it; to ship a fix, bump the version again.
 The workflow authenticates with its own `GITHUB_TOKEN` (`packages: write`).
 GitHub Packages only accepts an npm scope that matches the account that owns
 the package, and a workflow's `GITHUB_TOKEN` can only write packages for the
-account that owns the repository. So publishing `@peregrine-commit/*` needs
-this repository to live under the `Peregrine-Commit` organisation. While it
-lives under `BobbyCarelse`, transfer it first (Settings → Transfer) and update
-`repository.url` in both `package.json` files to the new location.
+account that owns the repository. That is why this repository lives under the
+`Peregrine-Commit` organisation: keep it there, or publishing `@peregrine-commit/*`
+will be refused.
 
 ### Installing in another project
 
