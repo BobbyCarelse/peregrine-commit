@@ -54,6 +54,18 @@ jobs:
       - name: Build
         run: pnpm turbo run build --filter=@peregrine-commit/token-factory --filter=@peregrine-commit/ui
 
+      - name: Verify build output
+        run: |
+          for dir in packages/token-factory packages/peregrine-commit-ui; do
+            for f in index.js index.cjs index.d.ts index.d.cts; do
+              test -f "$dir/dist/$f" || { echo "::error::$dir/dist/$f is missing"; exit 1; }
+            done
+          done
+          for f in index.js index.cjs; do
+            head -1 "packages/peregrine-commit-ui/dist/$f" | grep -qx "'use client';" \
+              || { echo "::error::ui dist/$f does not start with 'use client'"; exit 1; }
+          done
+
       # Dependency order: ui depends on token-factory.
       - name: Publish
         env:
