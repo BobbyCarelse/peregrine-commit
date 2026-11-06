@@ -1,0 +1,83 @@
+name: Publish packages
+
+# Publishes @peregrine-commit/token-factory and @peregrine-commit/ui to
+# GitHub Packages. Run it by pushing a `v*` tag (e.g. `v0.1.0`) or from the
+# Actions tab. A version that is already in the registry is skipped, because
+# GitHub Packages does not allow re-publishing a version: bump it instead.
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@peregrine-commit'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check tag matches package versions
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          for dir in packages/token-factory packages/peregrine-commit-ui; do
+            version=$(node -p "require('./$dir/package.json').version")
+            if [ "$version" != "$tag" ]; then
+              echo "::error::$dir is at $version but the tag is $GITHUB_REF_NAME"
+              exit 1
+            fi
+          done
+
+      - name: Build
+        run: pnpm turbo run build --filter=@peregrine-commit/token-factory --filter=@peregrine-commit/ui
+
+      - name: Verify build output
+        run: |
+          for dir in packages/token-factory packages/peregrine-commit-ui; do
+            for f in index.js index.cjs index.d.ts index.d.cts; do
+              test -f "$dir/dist/$f" || { echo "::error::$dir/dist/$f is missing"; exit 1; }
+            done
+          done
+          for f in index.js index.cjs; do
+            head -1 "packages/peregrine-commit-ui/dist/$f" | grep -qx "'use client';" \
+              || { echo "::error::ui dist/$f does not start with 'use client'"; exit 1; }
+          done
+
+      # Dependency order: ui depends on token-factory.
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for dir in packages/token-factory packages/peregrine-commit-ui; do
+            name=$(node -p "require('./$dir/package.json').name")
+            version=$(node -p "require('./$dir/package.json').version")
+            if npm view "$name@$version" version >/dev/null 2>&1; then
+              echo "$name@$version is already published, skipping"
+              continue
+            fi
+            echo "Publishing $name@$version"
+            (cd "$dir" && pnpm publish --no-git-checks)
+          done
